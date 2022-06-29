@@ -2,11 +2,24 @@ doctype html
 html
   head
     title
-      | GithubQuality
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
+      = t('.title')
+    meta[name='viewport' content='width=device-width,initial-scale=1']
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', media: 'all',
+                                         'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = yield
+    header
+      = render 'layouts/nav'
+    - flash.each do |type, message|
+      - case type
+      - when 'notice'
+        p.alert.alert-primary.text-center
+          = message
+      - when 'alert'
+        p.alert.alert-danger.text-center
+          = message
+    .container
+      = yield
+    = render 'layouts/footer'
