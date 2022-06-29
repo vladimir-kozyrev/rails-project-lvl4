@@ -9,7 +9,7 @@ A service where teams can track the quality of their public repositories. Reposi
 
 Example
 =======
-https://hexlet-project-lvl4.herokuapp.com/
+https://vkozyrev-rails-project-lvl4.herokuapp.com/
 
 Ruby version
 ============
