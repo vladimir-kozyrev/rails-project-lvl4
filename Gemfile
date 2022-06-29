@@ -37,7 +37,6 @@ group :development, :test do
   gem 'faker'
   gem 'i18n-tasks'
   gem 'minitest-power_assert'
-  gem 'rollbar'
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'slim_lint'
@@ -69,3 +68,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'rollbar'
