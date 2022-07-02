@@ -344,6 +344,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.4)
+  rails-i18n
   rollbar
   rubocop
   rubocop-rails
