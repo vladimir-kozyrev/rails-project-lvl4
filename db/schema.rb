@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_29_093305) do
+ActiveRecord::Schema.define(version: 2022_07_06_120702) do
+
+  create_table "repositories", force: :cascade do |t|
+    t.string "link"
+    t.string "owner_name"
+    t.string "repo_name"
+    t.text "description"
+    t.string "default_branch"
+    t.integer "watchers_count"
+    t.string "language"
+    t.datetime "repo_created_at"
+    t.datetime "repo_updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
