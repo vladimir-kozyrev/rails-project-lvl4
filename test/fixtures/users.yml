@@ -16,12 +16,12 @@ one:
   nickname: MyString
   name: MyString
   email: MyString
-  image_url: MyString
+  image_url: https://avatars.githubusercontent.com/u/7099677?v=4
   token: MyString
 
 two:
   nickname: MyString
   name: MyString
   email: MyString
-  image_url: MyString
+  image_url: https://avatars.githubusercontent.com/u/7099677?v=4
   token: MyString

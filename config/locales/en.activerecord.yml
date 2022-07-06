@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            image_url: 'You must specify a URL'

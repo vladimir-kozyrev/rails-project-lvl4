@@ -12,7 +12,12 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
       uid: '12345',
       info: {
         email: Faker::Internet.email,
-        name: Faker::Name.first_name
+        image: Faker::Internet.url,
+        name: Faker::Name.first_name,
+        nickname: Faker::Internet.username
+      },
+      credentials: {
+        token: Faker::Blockchain::Bitcoin.address
       }
     }
 

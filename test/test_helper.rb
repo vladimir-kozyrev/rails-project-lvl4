@@ -24,7 +24,12 @@ class ActionDispatch::IntegrationTest
       uid: '12345',
       info: {
         email: user.email,
-        name: user.name
+        image: user.image_url,
+        name: user.name,
+        nickname: user.nickname
+      },
+      credentials: {
+        token: user.token
       }
     }
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
