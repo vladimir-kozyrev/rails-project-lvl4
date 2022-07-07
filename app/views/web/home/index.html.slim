@@ -1,8 +1,11 @@
-h1.mt-3
-  = t('.title')
-p
-  = 'A service where teams can track the quality of their public repositories. '
-  = 'Repositories are connected to the project, which are then checked through the '
-  = link_to 'github check mechanism', 'https://docs.github.com/en/rest/reference/checks'
-  = '. The result is displayed both in the github interface and on the service itself.'
-= link_to t('.learn_more'), 'https://ru.hexlet.io/programs/rails/projects/66', class: 'btn btn-primary btn-lg px-4 mt-3'
+.mt-4.mb-5.pb-5
+  .p-4.align-items-center.border.shadow.bg-white.rounded-3
+    .mb-4
+      h1
+        = t('.title')
+      p
+        = t('.description_part_1')
+        = link_to t('.github_check_mechanism'), 'https://docs.github.com/en/rest/reference/checks'
+        = t('.description_part_2')
+      = link_to t('.learn_more'), 'https://ru.hexlet.io/programs/rails/projects/66',
+                                  class: 'btn btn-primary btn-lg px-4 mt-3'

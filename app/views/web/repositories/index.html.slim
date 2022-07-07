@@ -1,2 +1,23 @@
-h1 Web::Repositories#index
-p Find me in app/views/web/repositories/index.html.slim
+.mt-4.mb-5.pb-5
+  .p-4.align-items-center.border.shadow.bg-white.rounded-3
+    .mb-4
+      h1
+        = link_to t('.new'), new_repository_path, class: 'btn btn-primary'
+    table.table.table-striped.table-hover.mt-4
+      thead
+        tr
+          th[scope='col']
+            = t('.name')
+          th[scope='col']
+            = t('.language')
+          th[scope='col']
+            = t('.last_check_passed')
+      tbody
+      - @repositories.each do |repo|
+        tr
+          td
+            = link_to repo.repo_name, repository_path(repo)
+          td
+            = repo.language
+          td
+            = 'Last check passed??? (bool)'

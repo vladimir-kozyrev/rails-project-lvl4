@@ -4,7 +4,7 @@ nav.p-2.bg-dark.text-white
     ul.nav.me-auto
       - if signed_in?
         li.nav-item
-          = link_to t('.repositories'), root_path, class: 'text-white nav-link'
+          = link_to t('.repositories'), repositories_path, class: 'text-white nav-link'
     ul.nav
       - if signed_in?
         li.nav-item

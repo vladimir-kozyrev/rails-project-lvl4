@@ -1,0 +1,52 @@
+.mt-4.mb-5.pb-5
+  .p-4.align-items-center.border.shadow.bg-white.rounded-3
+    .mb-4
+      h1 = @repository.repo_name
+    / TODO
+    / a.btn.btn-primary.mb-4[rel="nofollow" data-method="post" href="/repositories/56/checks"]
+    /   | Check
+    p
+      strong.me-2
+        = t('basics.name')
+      = "#{@repository.owner_name}/#{@repository.repo_name}"
+    p
+      strong.me-2
+        = t('basics.language')
+      = @repository.language
+    p
+      strong.me-2
+        = t('basics.created_at')
+      = @repository.repo_created_at
+    p
+      strong.me-2
+        = t('basics.updated_at')
+      = @repository.repo_updated_at
+    / TODO
+    / hr
+    / table.table.table-striped
+    /   thead
+    /     tr
+    /       th[scope="col"]
+    /       th[scope="col"]
+    /         | State
+    /       th[scope="col"]
+    /         span.translation_missing[title="translation missing: en.web.repositories.show.reference"]
+    /           | Reference
+    /       th[scope="col"]
+    /         | Check passed
+    /       th[scope="col"]
+    /         | Created at
+    /   tbody
+    /     tr
+    /       td[scope="row"]
+    /         a[href="/repositories/56/checks/279"]
+    /           | 279
+    /       td[scope="row"]
+    /         | finished
+    /       td[scope="row"]
+    /         a[target="_blank" rel="noopener" REMOVED
+    /           | 3b03d53
+    /       td[scope="row"]
+    /         | false
+    /       td[scope="row"]
+    /         | 06 Jul 12:36

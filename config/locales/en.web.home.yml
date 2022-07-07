@@ -3,4 +3,7 @@ en:
     home:
       index:
         title: 'Github repository quality analyzer'
+        description_part_1: 'A service where teams can track the quality of their public repositories. Repositories are connected to the project, which are then checked through the '
+        description_part_2: '. The result is displayed both in the github interface and on the service itself.'
+        github_check_mechanism: 'GitHub check mechanism'
         learn_more: 'Learn more'

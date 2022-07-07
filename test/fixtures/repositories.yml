@@ -17,23 +17,23 @@
 #
 
 one:
-  link: MyString
-  owner_name: MyString
-  repo_name: MyString
-  description: MyText
-  default_branch: MyString
-  watchers_count: 1
-  language: MyString
+  link: https://github.com/test/test1
+  owner_name: username1
+  repo_name: test1
+  description: my description 1
+  default_branch: main
+  watchers_count: 5
+  language: Ruby
   repo_created_at: 2022-07-06 16:07:02
   repo_updated_at: 2022-07-06 16:07:02
 
 two:
-  link: MyString
-  owner_name: MyString
-  repo_name: MyString
-  description: MyText
-  default_branch: MyString
-  watchers_count: 1
-  language: MyString
+  link: https://github.com/test/test2
+  owner_name: username2
+  repo_name: test2
+  description: my description 2
+  default_branch: master
+  watchers_count: 83
+  language: JavaScript
   repo_created_at: 2022-07-06 16:07:02
   repo_updated_at: 2022-07-06 16:07:02

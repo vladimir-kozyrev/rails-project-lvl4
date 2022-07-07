@@ -1,0 +1,7 @@
+en:
+  web:
+    repositories:
+      new:
+        create_repository: 'Create repository'
+      create:
+        success: 'Repository was created successfully'

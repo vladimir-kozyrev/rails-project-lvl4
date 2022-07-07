@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  basics:
+    name: 'Name'
+    language: 'Language'
+    created_at: 'Created at'
+    updated_at: 'Updated at'
