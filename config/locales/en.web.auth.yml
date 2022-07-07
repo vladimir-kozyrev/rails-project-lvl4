@@ -1,6 +1,7 @@
 en:
   web:
     auth:
+      not_signed_in: 'You must be signed in to access this page'
       sign_out:
         signed_out: 'Signed out!'
       callback:

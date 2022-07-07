@@ -2,6 +2,8 @@
 
 module Web
   class RepositoriesController < ApplicationController
+    before_action :verify_signed_in, only: %i[new show create]
+
     def index
       @repositories = Repository.all
     end
@@ -16,7 +18,7 @@ module Web
 
     def create
       repo_full_name = permitted_params[:link].delete_prefix('https://github.com/')
-      repo_metadata = github_repo_metadata(repo_full_name)
+      repo_metadata = current_user.octokit_client.repo(repo_full_name)
       @repository = Repository.new(new_repo_params(repo_metadata))
       if @repository.save
         redirect_to @repository, notice: t('.success')
@@ -29,11 +31,6 @@ module Web
 
     def permitted_params
       params.require(:repository).permit(:link)
-    end
-
-    def github_repo_metadata(repo_name)
-      client = Octokit::Client.new
-      client.repo(repo_name)
     end
 
     def new_repo_params(repo_metadata)

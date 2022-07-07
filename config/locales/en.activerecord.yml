@@ -2,6 +2,10 @@ en:
   activerecord:
     errors:
       models:
+        repository:
+          attributes:
+            language:
+              inclusion: 'of this repository is not supported'
         user:
           attributes:
             image_url: 'You must specify a URL'

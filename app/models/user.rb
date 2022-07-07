@@ -29,4 +29,8 @@ class User < ApplicationRecord
     user.save!
     user
   end
+
+  def octokit_client
+    @octokit_client ||= Octokit::Client.new(access_token: token)
+  end
 end

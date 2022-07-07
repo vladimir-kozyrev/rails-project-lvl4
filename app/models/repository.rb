@@ -18,4 +18,7 @@
 #  updated_at      :datetime         not null
 #
 class Repository < ApplicationRecord
+  extend Enumerize
+
+  enumerize :language, in: ['JavaScript']
 end
