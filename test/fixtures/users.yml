@@ -12,14 +12,16 @@
 #  updated_at :datetime         not null
 #
 
-one:
+joe:
+  id: 111
   nickname: MyString
   name: MyString
   email: MyString
   image_url: https://avatars.githubusercontent.com/u/7099677?v=4
   token: MyString
 
-two:
+nicole:
+  id: 222
   nickname: MyString
   name: MyString
   email: MyString

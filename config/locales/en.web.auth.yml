@@ -2,6 +2,7 @@ en:
   web:
     auth:
       not_signed_in: 'You must be signed in to access this page'
+      not_authorized: 'You are not authorized to perform this action'
       sign_out:
         signed_out: 'Signed out!'
       callback:

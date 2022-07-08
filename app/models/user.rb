@@ -14,6 +14,8 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  has_many :repositories
+
   validates :email, presence: true
   validates :image_url, presence: true, format: { with: %r{https?://\S+} }
   validates :name, presence: true

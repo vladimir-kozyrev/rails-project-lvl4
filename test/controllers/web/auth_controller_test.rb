@@ -33,7 +33,7 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'sign out' do
-    user = users(:one)
+    user = users(:joe)
     sign_in(user)
     assert signed_in?
     sign_out
