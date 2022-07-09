@@ -6,5 +6,5 @@
       = f.error_notification
       = f.error_notification message: f.object.errors.full_messages.to_sentence if f.object.errors.present?
 
-      = f.input :link, collection: current_user.octokit_client.repos.map(&:html_url)
+      = f.input :link, collection: current_user.self_owned_repos.map(&:html_url)
       = f.submit t('.create_repository'), class: 'btn btn-success mt-2'

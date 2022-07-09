@@ -2,3 +2,7 @@ en:
   layouts:
     application:
       title: 'GitHub Quality'
+    nav:
+      repositories: 'Repositories'
+      sign_in: 'Sign In'
+      sign_out: 'Sign Out'

@@ -72,6 +72,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'aasm', '~> 5.2'
+gem 'dry-container', '~> 0.9.0'
 gem 'enumerize'
 gem 'octokit'
 gem 'omniauth-github'

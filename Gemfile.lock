@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.2.0)
+      concurrent-ruby (~> 1.0)
     actioncable (6.1.6)
       actionpack (= 6.1.6)
       activesupport (= 6.1.6)
@@ -97,6 +99,14 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+    dry-configurable (0.15.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.6)
+    dry-container (0.9.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.13, >= 0.13.0)
+    dry-core (0.7.1)
+      concurrent-ruby (~> 1.0)
     enumerize (2.5.0)
       activesupport (>= 3.2)
     erubi (1.10.0)
@@ -340,11 +350,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm (~> 5.2)
   annotate
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
   dotenv-rails
+  dry-container (~> 0.9.0)
   enumerize
   faker
   i18n-debug

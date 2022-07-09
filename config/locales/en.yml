@@ -35,3 +35,6 @@ en:
     language: 'Language'
     created_at: 'Created at'
     updated_at: 'Updated at'
+    check: 'Check'
+    state: 'State'
+    reference: 'Reference'

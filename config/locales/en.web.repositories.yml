@@ -5,3 +5,9 @@ en:
         create_repository: 'Create repository'
       create:
         success: 'Repository was created successfully'
+      show:
+        check_passed: 'Check passed'
+      checks:
+        create:
+          success: 'A check was successfully created'
+          failure: 'Failed to create a new check'

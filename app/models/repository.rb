@@ -28,6 +28,7 @@
 #
 class Repository < ApplicationRecord
   belongs_to :user
+  has_many :checks
 
   extend Enumerize
   enumerize :language, in: ['JavaScript']

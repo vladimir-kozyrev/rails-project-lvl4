@@ -18,8 +18,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    stubbed_response = load_fixture('../fixtures/files/response.json')
-    stub_request(:get, 'https://api.github.com/user/repos')
+    stubbed_response = load_fixture('../fixtures/files/octokit_response.json')
+    stub_request(:get, 'https://api.github.com/user/repos?per_page=100')
       .to_return(status: 200, body: "[#{stubbed_response}]", headers: { 'Content-Type': 'application/json' })
 
     get new_repository_url
@@ -30,7 +30,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repo_link = 'https://github.com/TheAlgorithms/JavaScript'
     repo_full_name = repo_link.delete_prefix('https://github.com/')
 
-    stubbed_response = load_fixture('../fixtures/files/response.json')
+    stubbed_response = load_fixture('../fixtures/files/octokit_response.json')
     stub_request(:get, "https://api.github.com/repos/#{repo_full_name}")
       .to_return(status: 200, body: stubbed_response, headers: { 'Content-Type': 'application/json' })
 
