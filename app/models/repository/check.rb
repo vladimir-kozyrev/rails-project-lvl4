@@ -27,18 +27,18 @@ class Repository::Check < ApplicationRecord
 
   aasm do
     state :created, initial: true
-    state :fetching, :fetched, :failed
+    state :checking, :passed, :failed
 
-    event :fetch do
-      transitions to: :fetching
+    event :check do
+      transitions to: :checking
     end
 
-    event :mark_as_fetched do
-      transitions from: :fetching, to: :fetched
+    event :pass do
+      transitions from: :checking, to: :passed
     end
 
     event :fail do
-      transitions from: :fetching, to: :failed
+      transitions from: :checking, to: :failed
     end
   end
 end

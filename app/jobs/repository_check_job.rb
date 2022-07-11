@@ -4,10 +4,10 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(check)
-    check.fetch! if check.may_fetch?
+    check.check! if check.may_check?
     check.linter = linter(check.repository.language)
-    if RepositoryChecker.new.run(check) && check.may_mark_as_fetched?
-      check.mark_as_fetched!
+    if RepositoryChecker.new.run(check) && check.may_pass?
+      check.pass!
     elsif check.may_fail?
       check.fail!
     end
