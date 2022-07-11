@@ -6,6 +6,8 @@
 #
 #  id            :integer          not null, primary key
 #  aasm_state    :string
+#  linter        :string
+#  output        :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  repository_id :integer          not null

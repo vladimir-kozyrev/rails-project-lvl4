@@ -10,13 +10,17 @@ module Web
       authorize @repository, :show?
       @check = @repository.checks.build
       if @check.save
-        RepositoryCheckJob.perform_later(@repository, @check)
+        RepositoryCheckJob.perform_later(@check)
         redirect_to @repository, notice: t('.success')
       else
         redirect_to @repository, notice: t('.failure')
       end
     end
 
-    def show; end
+    def show
+      @check = Repository::Check.find(params[:id])
+      authorize @check.repository, :show?
+      @check_output = JSON.parse(@check.output || '[]')
+    end
   end
 end

@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def self_owned_repos
-    # do not select any organization owned repositories
+    # do not select any organization-owned repositories
     octokit_client.repos.select { |r| r.owner.login == nickname }
   end
 end

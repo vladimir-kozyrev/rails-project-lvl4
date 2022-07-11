@@ -30,11 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  basics:
-    name: 'Name'
-    language: 'Language'
-    created_at: 'Created at'
-    updated_at: 'Updated at'
-    check: 'Check'
-    state: 'State'
-    reference: 'Reference'
+  name: 'Name'
+  language: 'Language'
+  created_at: 'Created at'
+  updated_at: 'Updated at'
+  check: 'Check'
+  state: 'State'
+  reference: 'Reference'

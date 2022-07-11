@@ -1,0 +1,47 @@
+.p-4.align-items-center.border.shadow.bg-white.rounded-3
+  .mb-4
+    h1
+  = link_to t('.go_to_repository'), repository_path(@check.repository), class: 'btn btn-primary mb-4'
+  h1
+    = "#{t('check')} ##{@check.id}"
+  table.table
+    tbody
+      tr
+        td
+          = t('created_at')
+        td
+          = @check.created_at
+      tr
+        td
+          = t('status')
+        td
+          = t('finished')
+      tr
+        td
+          = t('.check_passed')
+        td
+          = !@check.failed?
+      tr
+        td
+          = t('.issues_count')
+        td
+          = 'Some number'
+  table.table.table-hover.mb-5
+    thead
+      tr
+        th
+          = t('message')
+        th
+          = t('rule')
+        th
+          = t('.line_column')
+    tbody
+      - @check_output.each do |output|
+        tr
+          td[colspan="3"]
+            strong = output['filePath']
+        - output['messages'].each do |output_message|
+          tr
+            td = output_message['message']
+            td = 'N/A'
+            td = "#{output_message['line']}:#{output_message['column']}"

@@ -16,9 +16,9 @@ class RepositoryCheck
 
   def self.check(repository_path)
     command = "npx eslint --no-eslintrc --format json #{repository_path}"
-    exit_status = Open3.popen3(command) do |_stdin, _stdout, _stderr, wait_thr|
-      wait_thr.value
+    stdout, exit_status = Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
+      [stdout.read, wait_thr.value]
     end
-    exit_status.exitstatus
+    [stdout, exit_status.exitstatus]
   end
 end

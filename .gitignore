@@ -41,6 +41,3 @@ yarn-debug.log*
 
 # dotenv-rails gem
 .env
-
-# repositories cloned by the app
-repositories/
