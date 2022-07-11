@@ -1,6 +1,8 @@
 en:
   web:
     repositories:
+      index:
+        last_check_passed: 'Last check passed'
       new:
         create_repository: 'Create repository'
       create:
@@ -11,3 +13,9 @@ en:
         create:
           success: 'A check was successfully created'
           failure: 'Failed to create a new check'
+        show:
+          go_to_repository: 'Go to repository'
+          check_passed: 'Check passed'
+          issues_count: 'Issues count'
+          line_column: 'Line:Column'
+

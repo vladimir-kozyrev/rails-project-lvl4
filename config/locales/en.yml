@@ -31,9 +31,14 @@
 
 en:
   name: 'Name'
+  new: 'New'
   language: 'Language'
   created_at: 'Created at'
   updated_at: 'Updated at'
   check: 'Check'
   state: 'State'
   reference: 'Reference'
+  status: 'Status'
+  message: 'Message'
+  rule: 'Rule'
+  finished: 'Finished'

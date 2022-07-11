@@ -37,7 +37,10 @@
         - @repository.checks.each do |check|
           tr
             td[scope="row"]
-              = link_to check.id, check_path(check)
+              - if check.passed? || check.failed?
+                = link_to check.id, check_path(check)
+              - else
+                = check.id
             td[scope="row"]
               = check.aasm_state
             td[scope="row"]
