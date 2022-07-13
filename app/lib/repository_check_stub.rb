@@ -6,6 +6,6 @@ class RepositoryCheckStub
   end
 
   def self.check(_)
-    [File.read("#{Rails.root}/test/fixtures/files/eslint_check_result.json"), 1]
+    [File.read('test/fixtures/files/eslint_check_result.json'), 1]
   end
 end

@@ -31,5 +31,5 @@ class Repository < ApplicationRecord
   has_many :checks
 
   extend Enumerize
-  enumerize :language, in: ['JavaScript', 'Ruby']
+  enumerize :language, in: %w[JavaScript Ruby]
 end
