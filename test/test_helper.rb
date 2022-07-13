@@ -17,7 +17,7 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def load_fixture(filename)
-    File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
+    File.read(File.dirname(__FILE__) + "/fixtures/files/#{filename}")
   end
 end
 
