@@ -5,7 +5,7 @@ class RepositoryCheckJob < ApplicationJob
 
   def perform(check)
     check.check! if check.may_check?
-    check.linter = linter(check.repository.language)
+    check.linter = linter_for(check.repository.language)
     if RepositoryChecker.new.run(check) && check.may_pass?
       check.pass!
     elsif check.may_fail?
@@ -19,9 +19,11 @@ end
 
 private
 
-def linter(language)
+def linter_for(language)
   case language
   when 'JavaScript'
     'eslint'
+  when 'Ruby'
+    'rubocop'
   end
 end
