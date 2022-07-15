@@ -1,0 +1,41 @@
+{
+    "metadata": {
+        "rubocop_version": "1.26.0",
+        "ruby_engine": "ruby",
+        "ruby_version": "3.0.2",
+        "ruby_patchlevel": "107",
+        "ruby_platform": "arm64-darwin21"
+    },
+    "files": [
+        {
+            "path": "Gemfile",
+            "offenses": []
+        },
+        {
+            "path": "app/controllers/web/home_controller.rb",
+            "offenses": [
+                {
+                    "severity": "convention",
+                    "message": "Put empty method definitions on a single line.",
+                    "cop_name": "Style/EmptyMethod",
+                    "corrected": false,
+                    "correctable": true,
+                    "location": {
+                        "start_line": 5,
+                        "start_column": 5,
+                        "last_line": 6,
+                        "last_column": 7,
+                        "length": 17,
+                        "line": 5,
+                        "column": 5
+                    }
+                }
+            ]
+        }
+    ],
+    "summary": {
+        "offense_count": 1,
+        "target_file_count": 61,
+        "inspected_file_count": 61
+    }
+}

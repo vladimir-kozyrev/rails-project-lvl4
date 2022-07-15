@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+
 class RepositoryCheck
   def self.download(repository)
     repo_clone_path = "#{Rails.root}/tmp/repositories/#{repository.owner_name}_#{repository.repo_name}"
@@ -14,9 +15,14 @@ class RepositoryCheck
     repo_clone_path
   end
 
-  def self.check(repository_path)
-    command = "npx eslint --no-eslintrc --format json #{repository_path}"
-    stdout, exit_status = Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
+  def self.check(repository_path, linter)
+    linter_command = case linter
+                     when 'eslint'
+                       "npx eslint --no-eslintrc --format json #{repository_path}"
+                     when 'rubocop'
+                       "rubocop --format json #{repository_path}/*"
+                     end
+    stdout, exit_status = Open3.popen3(linter_command) do |_stdin, stdout, _stderr, wait_thr|
       [stdout.read, wait_thr.value]
     end
     [stdout, exit_status.exitstatus]

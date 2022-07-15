@@ -9,7 +9,7 @@ class RepositoryChecker
       return false
     end
 
-    check.output, exit_code = repository_check.check(repository_path)
+    check.output, exit_code = repository_check.check(repository_path, check.linter)
     return false if exit_code != 0
 
     true

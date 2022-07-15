@@ -36,12 +36,12 @@
         th
           = t('.line_column')
     tbody
-      - @check_output.each do |output|
+      - parse_check_output(@check_output_json, @check.linter).each do |file_name, file_messages|
         tr
           td[colspan="3"]
-            strong = output['filePath']
-        - output['messages'].each do |output_message|
+            strong = file_name
+        - file_messages.each do |message|
           tr
-            td = output_message['message']
-            td = 'N/A'
-            td = "#{output_message['line']}:#{output_message['column']}"
+            td = message[:message]
+            td = message[:rule]
+            td = message[:line_column]

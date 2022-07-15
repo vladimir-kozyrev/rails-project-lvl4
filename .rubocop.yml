@@ -46,3 +46,6 @@ Rails/I18nLocaleTexts:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent

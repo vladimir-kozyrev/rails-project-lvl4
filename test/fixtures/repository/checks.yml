@@ -24,6 +24,6 @@ one:
   repository: one
 
 two:
-  linter: eslint
+  linter: rubocop
   output:
   repository: two

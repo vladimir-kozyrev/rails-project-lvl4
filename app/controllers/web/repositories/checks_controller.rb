@@ -20,7 +20,7 @@ module Web
     def show
       @check = Repository::Check.find(params[:id])
       authorize @check.repository, :show?
-      @check_output = JSON.parse(@check.output || '[]')
+      @check_output_json = JSON.parse(@check.output || '[]')
     end
   end
 end
