@@ -8,6 +8,8 @@ nav.p-2.bg-dark.text-white
     ul.nav
       - if signed_in?
         li.nav-item
+          = link_to current_user.email, '#', class: 'text-muted nav-link'
+        li.nav-item
           = link_to t('.sign_out'), sign_out_path, method: :delete, class: 'text-white nav-link'
       - else
         li.nav-item
