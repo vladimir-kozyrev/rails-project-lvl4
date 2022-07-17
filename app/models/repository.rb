@@ -7,6 +7,7 @@
 #  id              :integer          not null, primary key
 #  default_branch  :string
 #  description     :text
+#  full_name       :string
 #  language        :string
 #  link            :string
 #  owner_name      :string

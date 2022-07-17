@@ -19,8 +19,7 @@ module Web
     end
 
     def create
-      repo_full_name = permitted_params[:link].delete_prefix('https://github.com/')
-      repo_metadata = current_user.octokit_client.repo(repo_full_name)
+      repo_metadata = current_user.octokit_client.repo(permitted_params[:full_name])
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
       if @repository.save
         redirect_to @repository, notice: t('.success')
@@ -32,7 +31,7 @@ module Web
     private
 
     def permitted_params
-      params.require(:repository).permit(:link)
+      params.require(:repository).permit(:full_name)
     end
 
     def new_repo_params(repo_metadata)
@@ -40,6 +39,7 @@ module Web
         link: repo_metadata['html_url'],
         owner_name: repo_metadata['owner']['login'],
         repo_name: repo_metadata['name'],
+        full_name: repo_metadata['full_name'],
         description: repo_metadata['description'],
         default_branch: repo_metadata['default_branch'],
         watchers_count: repo_metadata['watchers_count'],

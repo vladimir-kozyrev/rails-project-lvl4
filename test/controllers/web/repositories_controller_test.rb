@@ -27,15 +27,14 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create repository' do
-    repo_link = 'https://github.com/TheAlgorithms/JavaScript'
-    repo_full_name = repo_link.delete_prefix('https://github.com/')
+    repo_full_name = 'TheAlgorithms/JavaScript'
 
     stubbed_response = load_fixture('octokit_response.json')
     stub_request(:get, "https://api.github.com/repos/#{repo_full_name}")
       .to_return(status: 200, body: stubbed_response, headers: { 'Content-Type': 'application/json' })
 
-    post repositories_url, params: { repository: { link: repo_link } }
+    post repositories_url, params: { repository: { full_name: repo_full_name } }
     assert_response :redirect
-    assert { Repository.find_by(link: repo_link) }
+    assert { Repository.find_by(full_name: repo_full_name) }
   end
 end
