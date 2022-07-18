@@ -4,10 +4,15 @@ require 'test_helper'
 
 class RepostiroyCheckMailerTest < ActionMailer::TestCase
   test 'notify_about_failure' do
-    mail = RepostiroyCheckMailer.notify_about_failure
+    mail = RepostiroyCheckMailer.with(
+      name: 'Unicorn',
+      email: 'unicorn@test.io',
+      check_url: 'test.io/checks/5'
+    ).notify_about_failure
     assert_equal 'Repository check failed', mail.subject
-    assert_equal ['to@example.org'], mail.to
+    assert_equal ['unicorn@test.io'], mail.to
     assert_equal ['from@example.com'], mail.from
-    assert_match 'Dear ', mail.body.encoded
+    assert_match 'Unicorn', mail.body.encoded
+    assert_match 'test.io/checks/5', mail.body.encoded
   end
 end
