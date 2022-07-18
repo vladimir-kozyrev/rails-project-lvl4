@@ -20,6 +20,8 @@ module Web
 
     def create
       repo_full_name = permitted_params[:full_name]
+      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(full_name: repo_full_name)
+
       repo_metadata = current_user.octokit_client.repo(repo_full_name)
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
       if @repository.save
