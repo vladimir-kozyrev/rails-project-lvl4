@@ -25,6 +25,9 @@ class RepositoryCheck
     stdout, exit_status = Open3.popen3(linter_command) do |_stdin, stdout, _stderr, wait_thr|
       [stdout.read, wait_thr.value]
     end
+    # since stdout will be put into check.output,
+    # we must set it to nil because JSON.parse("") throws an error
+    stdout = nil if stdout.empty?
     [stdout, exit_status.exitstatus]
   end
 end
