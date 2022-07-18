@@ -10,10 +10,12 @@ class RepositoryCheckJob < ApplicationJob
       check.pass!
     elsif check.may_fail?
       check.fail!
+      RepostiroyCheckMailer.notify_about_failure.deliver_later
     end
   rescue StandardError => e
     Rails.logger.error(e.message)
     check.fail! if check.may_fail?
+    RepostiroyCheckMailer.notify_about_failure.deliver_later
   end
 end
 
