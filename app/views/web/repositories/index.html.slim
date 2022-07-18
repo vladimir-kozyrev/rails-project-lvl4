@@ -20,4 +20,4 @@
           td
             = repo.language
           td
-            = repo.checks.last.passed?
+            = repo.checks.last&.passed?

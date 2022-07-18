@@ -16,4 +16,10 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     delete 'sign_out', to: 'auth#sign_out'
   end
+
+  namespace :api do
+    scope module: :repositories do
+      resources :checks, only: :create
+    end
+  end
 end

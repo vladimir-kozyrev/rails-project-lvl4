@@ -6,14 +6,14 @@ module Web
     after_action :verify_authorized, only: %i[create show]
 
     def create
-      @repository = Repository.find(params[:repository_id])
-      authorize @repository, :show?
-      @check = @repository.checks.build
-      if @check.save
-        RepositoryCheckJob.perform_later(@check)
-        redirect_to @repository, notice: t('.success')
+      repository = Repository.find(params[:repository_id])
+      authorize repository, :show?
+      check = repository.checks.build
+      if check.save
+        RepositoryCheckJob.perform_later(check)
+        redirect_to repository, notice: t('.success')
       else
-        redirect_to @repository, notice: t('.failure')
+        redirect_to repository, notice: t('.failure')
       end
     end
 
