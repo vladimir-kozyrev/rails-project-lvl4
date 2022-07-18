@@ -7,8 +7,10 @@ class RepostiroyCheckMailer < ApplicationMailer
   #   en.repostiroy_check_mailer.notify_about_failure.subject
   #
   def notify_about_failure
-    @greeting = 'Hi'
+    @name = params[:name] || 'customer'
+    @email = params[:email] || 'to@example.org'
+    @check_url = params[:check_url] || ENV['BASE_URL']
 
-    mail to: 'to@example.org'
+    mail to: @email
   end
 end

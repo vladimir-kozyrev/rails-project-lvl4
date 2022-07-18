@@ -1,0 +1,6 @@
+en:
+  repostiroy_check_mailer:
+    notify_about_failure:
+      subject: 'Repository check failed'
+      greeting: 'Dear %{name}, a repository check has just failed.'
+      check_link: 'You can find the result at %{check_url}.'

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RepositoryCheckJob < ApplicationJob
+  include Rails.application.routes.url_helpers
+
   queue_as :default
 
   def perform(check)
@@ -10,12 +12,12 @@ class RepositoryCheckJob < ApplicationJob
       check.pass!
     elsif check.may_fail?
       check.fail!
-      RepostiroyCheckMailer.notify_about_failure.deliver_later
     end
   rescue StandardError => e
     Rails.logger.error(e.message)
     check.fail! if check.may_fail?
-    RepostiroyCheckMailer.notify_about_failure.deliver_later
+  ensure
+    notify_about_failure(check)
   end
 end
 
@@ -28,4 +30,12 @@ def linter_for(language)
   when 'Ruby'
     'rubocop'
   end
+end
+
+def notify_about_failure(check)
+  RepostiroyCheckMailer.with(
+    name: check.repository.user.name,
+    email: check.repository.user.email,
+    check_url: check_url(check)
+  ).notify_about_failure.deliver_later
 end
