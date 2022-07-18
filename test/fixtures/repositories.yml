@@ -28,8 +28,9 @@
 
 one:
   link: https://github.com/test/test1
-  owner_name: username1
+  owner_name: test
   repo_name: test1
+  full_name: test/test1
   description: my description 1
   default_branch: main
   watchers_count: 5
@@ -40,8 +41,9 @@ one:
 
 two:
   link: https://github.com/test/test2
-  owner_name: username2
+  owner_name: test
   repo_name: test2
+  full_name: test/test2
   description: my description 2
   default_branch: master
   watchers_count: 83
