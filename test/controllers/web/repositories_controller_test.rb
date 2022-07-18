@@ -18,7 +18,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    stubbed_response = load_fixture('octokit_response.json')
+    stubbed_response = load_fixture('octokit_repo_response.json')
     stub_request(:get, 'https://api.github.com/user/repos?per_page=100')
       .to_return(status: 200, body: "[#{stubbed_response}]", headers: { 'Content-Type': 'application/json' })
 
@@ -29,9 +29,15 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   test 'should create repository' do
     repo_full_name = 'TheAlgorithms/JavaScript'
 
-    stubbed_response = load_fixture('octokit_response.json')
+    stubbed_get_repo_response = load_fixture('octokit_repo_response.json')
     stub_request(:get, "https://api.github.com/repos/#{repo_full_name}")
-      .to_return(status: 200, body: stubbed_response, headers: { 'Content-Type': 'application/json' })
+      .to_return(status: 200, body: stubbed_get_repo_response, headers: { 'Content-Type': 'application/json' })
+    stubbed_get_hooks_respone = load_fixture('octokit_get_hooks_response.json')
+    stub_request(:get, "https://api.github.com/repos/#{repo_full_name}/hooks?per_page=100")
+      .to_return(status: 200, body: stubbed_get_hooks_respone, headers: { 'Content-Type': 'application/json' })
+    stubbed_create_hook_response = load_fixture('octokit_create_hook_response.json')
+    stub_request(:post, "https://api.github.com/repos/#{repo_full_name}/hooks")
+      .to_return(status: 201, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
 
     post repositories_url, params: { repository: { full_name: repo_full_name } }
     assert_response :redirect

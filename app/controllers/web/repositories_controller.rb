@@ -19,9 +19,11 @@ module Web
     end
 
     def create
-      repo_metadata = current_user.octokit_client.repo(permitted_params[:full_name])
+      repo_full_name = permitted_params[:full_name]
+      repo_metadata = current_user.octokit_client.repo(repo_full_name)
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
       if @repository.save
+        create_webhook(repo_full_name)
         redirect_to @repository, notice: t('.success')
       else
         render :new, status: :unprocessable_entity
@@ -46,6 +48,19 @@ module Web
         language: repo_metadata['parent'] ? repo_metadata['parent']['language'] : repo_metadata['language'],
         repo_created_at: repo_metadata['created_at'],
         repo_updated_at: repo_metadata['updated_at']
+      }
+    end
+
+    def create_webhook(repo_full_name)
+      hooks_with_equal_config = current_user.octokit_client.hooks(repo_full_name).select do |hook|
+        hook.config.to_h == webhook_config
+      end
+      current_user.octokit_client.create_hook(repo_full_name, 'web', webhook_config) if hooks_with_equal_config.empty?
+    end
+
+    def webhook_config
+      {
+        url: "#{ENV['BASE_URL']}/api/checks", content_type: 'json', insecure_ssl: '0'
       }
     end
   end
