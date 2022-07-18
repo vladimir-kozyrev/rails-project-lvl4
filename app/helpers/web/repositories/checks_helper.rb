@@ -31,6 +31,8 @@ module Web::Repositories::ChecksHelper
   end
 
   def format_rubocop_output(output)
+    return {} if output.empty?
+
     formatted_output = {}
     output['files'].each do |file|
       next if file['offenses'].empty?
