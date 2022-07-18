@@ -25,7 +25,7 @@
         td
           = t('.issues_count')
         td
-          = 'Some number'
+          = issues_count(@check_output_json, @check.linter)
   table.table.table-hover.mb-5
     thead
       tr

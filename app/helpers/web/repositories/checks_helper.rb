@@ -10,6 +10,19 @@ module Web::Repositories::ChecksHelper
     end
   end
 
+  def issues_count(check_output, linter)
+    case linter
+    when 'rubocop'
+      if check_output.is_a?(Hash)
+        check_output.fetch('files', []).size
+      else
+        0
+      end
+    else
+      check_output.size
+    end
+  end
+
   private
 
   def format_eslint_output(output)
