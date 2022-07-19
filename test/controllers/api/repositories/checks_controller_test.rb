@@ -12,6 +12,6 @@ class Api::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
   test 'should create check for existing repository' do
     webhook_params = load_fixture('existing_repository_webhook_payload.json')
     post api_checks_url, params: JSON.parse(webhook_params)
-    assert_response :created
+    assert_response :ok
   end
 end

@@ -21,7 +21,7 @@ module Api
       check = repository.checks.build
       if check.save
         RepositoryCheckJob.perform_later(check)
-        render status: :created, json: '{"message": "A check was successfully created"}'
+        render status: :ok, json: '{"message": "A check was successfully created"}'
       else
         render status: :unprocessable_entity, json: '{"message": "Failed to create a new check"}'
       end
