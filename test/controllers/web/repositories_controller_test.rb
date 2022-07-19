@@ -27,7 +27,6 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create repository' do
-    repo_full_name = 'TheAlgorithms/JavaScript'
     repo_id = 1_296_269
 
     get_repo_template = Addressable::Template.new('https://api.github.com/repositories/{id}')
