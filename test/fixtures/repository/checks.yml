@@ -6,6 +6,7 @@
 #  aasm_state    :string
 #  linter        :string
 #  output        :text
+#  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  repository_id :integer          not null
