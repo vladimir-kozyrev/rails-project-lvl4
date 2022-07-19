@@ -7,7 +7,8 @@ class RepositoryCheckJobTest < ActiveJob::TestCase
     check = repository_checks(:one)
     RepositoryCheckJob.perform_now(check)
     check.reload
-    assert { check.failed? }
+    assert { check.finished? }
+    assert_not check.passed?
     assert { check.output == load_fixture('eslint_check_result.json') }
   end
 
@@ -15,7 +16,8 @@ class RepositoryCheckJobTest < ActiveJob::TestCase
     check = repository_checks(:two)
     RepositoryCheckJob.perform_now(check)
     check.reload
-    assert { check.failed? }
+    assert { check.finished? }
+    assert_not check.passed?
     assert { check.output == load_fixture('rubocop_check_result.json') }
   end
 end

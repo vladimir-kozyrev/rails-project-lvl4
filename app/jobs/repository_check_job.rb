@@ -8,15 +8,11 @@ class RepositoryCheckJob < ApplicationJob
   def perform(check)
     check.check! if check.may_check?
     check.linter = linter_for(check.repository.language)
-    if RepositoryChecker.new.run(check) && check.may_pass?
-      check.pass!
-    elsif check.may_fail?
-      check.fail!
-    end
+    check.passed = true if RepositoryChecker.new.run(check)
   rescue StandardError => e
     Rails.logger.error(e.message)
-    check.fail! if check.may_fail?
   ensure
+    check.finish! if check.may_finish?
     notify_about_failure(check)
   end
 end

@@ -37,7 +37,7 @@
         - @repository.checks.each do |check|
           tr
             td[scope="row"]
-              - if check.passed? || check.failed?
+              - if check.finished?
                 = link_to check.id, repository_check_path(@repository, check)
               - else
                 = check.id
