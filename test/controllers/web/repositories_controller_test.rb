@@ -28,9 +28,10 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create repository' do
     repo_full_name = 'TheAlgorithms/JavaScript'
+    repo_id = 1_296_269
 
     stubbed_get_repo_response = load_fixture('octokit_repo_response.json')
-    stub_request(:get, "https://api.github.com/repos/#{repo_full_name}")
+    stub_request(:get, "https://api.github.com/repositories/#{repo_id}")
       .to_return(status: 200, body: stubbed_get_repo_response, headers: { 'Content-Type': 'application/json' })
     stubbed_get_hooks_respone = load_fixture('octokit_get_hooks_response.json')
     stub_request(:get, "https://api.github.com/repos/#{repo_full_name}/hooks?per_page=100")
@@ -39,8 +40,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     stub_request(:post, "https://api.github.com/repos/#{repo_full_name}/hooks")
       .to_return(status: 201, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
 
-    post repositories_url, params: { repository: { github_id: repo_full_name } }
+    post repositories_url, params: { repository: { github_id: repo_id } }
     assert_response :redirect
-    assert { Repository.find_by(github_id: repo_full_name) }
+    assert { Repository.find_by(github_id: repo_id) }
   end
 end

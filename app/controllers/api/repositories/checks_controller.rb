@@ -11,7 +11,7 @@ module Api
       end
 
       repo_full_name = params[:repository][:full_name]
-      repository = Repository.find_by(github_id: repo_full_name)
+      repository = Repository.find_by(full_name: repo_full_name)
 
       if repository.blank?
         render status: :unprocessable_entity, json: '{"message": "A repository with that name have not been created"}'

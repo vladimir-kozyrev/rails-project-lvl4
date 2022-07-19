@@ -19,14 +19,13 @@ module Web
     end
 
     def create
-      repo_full_name = permitted_params[:github_id]
-      # redirect_to repositories_path, alert: t('.failure') and return if repo_full_name.empty?
-      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_full_name)
+      repo_id = permitted_params[:github_id].to_i
+      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_id)
 
-      repo_metadata = current_user.octokit_client.repo(repo_full_name)
+      repo_metadata = current_user.octokit_client.repo(repo_id)
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
       if @repository.save
-        create_webhook(repo_full_name)
+        create_webhook(@repository.full_name)
         redirect_to @repository, notice: t('.success')
       else
         render :new, status: :unprocessable_entity
@@ -41,10 +40,11 @@ module Web
 
     def new_repo_params(repo_metadata)
       {
+        github_id: repo_metadata['id'],
         link: repo_metadata['html_url'],
         owner_name: repo_metadata['owner']['login'],
         name: repo_metadata['name'],
-        github_id: repo_metadata['full_name'],
+        full_name: repo_metadata['full_name'],
         description: repo_metadata['description'],
         default_branch: repo_metadata['default_branch'],
         watchers_count: repo_metadata['watchers_count'],

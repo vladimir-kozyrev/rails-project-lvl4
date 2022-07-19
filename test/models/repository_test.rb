@@ -7,6 +7,7 @@
 #  id              :integer          not null, primary key
 #  default_branch  :string
 #  description     :text
+#  full_name       :string
 #  language        :string
 #  link            :string
 #  name            :string
@@ -16,7 +17,7 @@
 #  watchers_count  :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  github_id       :string
+#  github_id       :integer          not null
 #  user_id         :integer          not null
 #
 # Indexes
