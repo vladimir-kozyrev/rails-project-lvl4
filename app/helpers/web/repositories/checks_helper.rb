@@ -7,6 +7,8 @@ module Web::Repositories::ChecksHelper
       format_eslint_output(check_output)
     when 'rubocop'
       format_rubocop_output(check_output)
+    else
+      {}
     end
   end
 
