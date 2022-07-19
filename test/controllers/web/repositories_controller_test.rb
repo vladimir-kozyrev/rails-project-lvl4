@@ -30,15 +30,20 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repo_full_name = 'TheAlgorithms/JavaScript'
     repo_id = 1_296_269
 
+    get_repo_template = Addressable::Template.new('https://api.github.com/repositories/{id}')
     stubbed_get_repo_response = load_fixture('octokit_repo_response.json')
-    stub_request(:get, "https://api.github.com/repositories/#{repo_id}")
+    stub_request(:get, get_repo_template)
       .to_return(status: 200, body: stubbed_get_repo_response, headers: { 'Content-Type': 'application/json' })
+
+    get_hook_template = Addressable::Template.new('https://api.github.com/repos/{owner_name}/{repo_name}/hooks?per_page=100')
     stubbed_get_hooks_respone = load_fixture('octokit_get_hooks_response.json')
-    stub_request(:get, "https://api.github.com/repos/#{repo_full_name}/hooks?per_page=100")
+    stub_request(:get, get_hook_template)
       .to_return(status: 200, body: stubbed_get_hooks_respone, headers: { 'Content-Type': 'application/json' })
+
+    create_hook_template = Addressable::Template.new('https://api.github.com/repos/{owner_name}/{repo_name}/hooks')
     stubbed_create_hook_response = load_fixture('octokit_create_hook_response.json')
-    stub_request(:post, "https://api.github.com/repos/#{repo_full_name}/hooks")
-      .to_return(status: 201, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
+    stub_request(:post, create_hook_template)
+      .to_return(status: 200, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
 
     post repositories_url, params: { repository: { github_id: repo_id } }
     assert_response :redirect
