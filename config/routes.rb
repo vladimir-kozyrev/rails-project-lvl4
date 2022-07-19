@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root 'home#index'
     resources :home, only: :index
     resources :repositories do
-      scope module: :repositories, shallow: true do
+      scope module: :repositories do
         resources :checks, only: %i[create show]
       end
     end

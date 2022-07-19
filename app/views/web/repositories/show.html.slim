@@ -38,7 +38,7 @@
           tr
             td[scope="row"]
               - if check.passed? || check.failed?
-                = link_to check.id, check_path(check)
+                = link_to check.id, repository_check_path(@repository, check)
               - else
                 = check.id
             td[scope="row"]

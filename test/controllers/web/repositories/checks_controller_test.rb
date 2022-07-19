@@ -9,7 +9,7 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get show' do
     check = repository_checks(:one)
-    get check_url(check)
+    get repository_check_url(check.repository, check)
     assert_response :success
   end
 

@@ -36,6 +36,6 @@ def notify_about_failure(check)
   RepostiroyCheckMailer.with(
     name: check.repository.user.name,
     email: check.repository.user.email,
-    check_url: check_url(check)
+    check_url: repository_check_url(check.repository, check)
   ).notify_about_failure.deliver_later
 end
