@@ -16,7 +16,7 @@
       - @repositories.each do |repo|
         tr
           td
-            = link_to repo.repo_name, repository_path(repo)
+            = link_to repo.name, repository_path(repo)
           td
             = repo.language
           td

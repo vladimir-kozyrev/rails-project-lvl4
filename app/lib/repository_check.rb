@@ -4,7 +4,7 @@ require 'fileutils'
 
 class RepositoryCheck
   def self.download(repository)
-    repo_clone_path = "#{Rails.root}/tmp/repositories/#{repository.owner_name}_#{repository.repo_name}"
+    repo_clone_path = "#{Rails.root}/tmp/repositories/#{repository.owner_name}_#{repository.name}"
     FileUtils.rm_rf(repo_clone_path)
     command = "git clone #{repository.link} #{repo_clone_path}"
     exit_status = Open3.popen3(command) do |_stdin, _stdout, _stderr, wait_thr|

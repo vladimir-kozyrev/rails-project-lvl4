@@ -19,8 +19,9 @@ module Web
     end
 
     def create
-      repo_full_name = permitted_params[:full_name]
-      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(full_name: repo_full_name)
+      repo_full_name = permitted_params[:github_id]
+      # redirect_to repositories_path, alert: t('.failure') and return if repo_full_name.empty?
+      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_full_name)
 
       repo_metadata = current_user.octokit_client.repo(repo_full_name)
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
@@ -35,15 +36,15 @@ module Web
     private
 
     def permitted_params
-      params.require(:repository).permit(:full_name)
+      params.require(:repository).permit(:github_id)
     end
 
     def new_repo_params(repo_metadata)
       {
         link: repo_metadata['html_url'],
         owner_name: repo_metadata['owner']['login'],
-        repo_name: repo_metadata['name'],
-        full_name: repo_metadata['full_name'],
+        name: repo_metadata['name'],
+        github_id: repo_metadata['full_name'],
         description: repo_metadata['description'],
         default_branch: repo_metadata['default_branch'],
         watchers_count: repo_metadata['watchers_count'],

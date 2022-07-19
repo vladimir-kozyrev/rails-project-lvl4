@@ -39,8 +39,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     stub_request(:post, "https://api.github.com/repos/#{repo_full_name}/hooks")
       .to_return(status: 201, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
 
-    post repositories_url, params: { repository: { full_name: repo_full_name } }
+    post repositories_url, params: { repository: { github_id: repo_full_name } }
     assert_response :redirect
-    assert { Repository.find_by(full_name: repo_full_name) }
+    assert { Repository.find_by(github_id: repo_full_name) }
   end
 end

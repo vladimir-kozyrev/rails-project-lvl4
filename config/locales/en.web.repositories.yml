@@ -7,6 +7,7 @@ en:
         create_repository: 'Create repository'
       create:
         success: 'Repository was created successfully'
+        failure: 'Repository name must not be empty'
       show:
         check_passed: 'Check passed'
       checks:

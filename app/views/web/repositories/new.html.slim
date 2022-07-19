@@ -5,5 +5,5 @@
         = f.error_notification
         = f.error_notification message: f.object.errors.full_messages.to_sentence if f.object.errors.present?
 
-        = f.input :full_name, collection: current_user.self_owned_repos.map(&:full_name)
+        = f.input :github_id, collection: current_user.self_owned_repos.map(&:full_name)
         = f.submit t('.create_repository'), class: 'btn btn-success mt-2'

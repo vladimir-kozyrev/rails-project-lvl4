@@ -5,16 +5,16 @@
 #  id              :integer          not null, primary key
 #  default_branch  :string
 #  description     :text
-#  full_name       :string
 #  language        :string
 #  link            :string
+#  name            :string
 #  owner_name      :string
 #  repo_created_at :datetime
-#  repo_name       :string
 #  repo_updated_at :datetime
 #  watchers_count  :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  github_id       :string
 #  user_id         :integer          not null
 #
 # Indexes
@@ -29,8 +29,8 @@
 one:
   link: https://github.com/test/test1
   owner_name: test
-  repo_name: test1
-  full_name: test/test1
+  name: test1
+  github_id: test/test1
   description: my description 1
   default_branch: main
   watchers_count: 5
@@ -42,8 +42,8 @@ one:
 two:
   link: https://github.com/test/test2
   owner_name: test
-  repo_name: test2
-  full_name: test/test2
+  name: test2
+  github_id: test/test2
   description: my description 2
   default_branch: master
   watchers_count: 83
