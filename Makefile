@@ -16,7 +16,6 @@ lint:
 check: lint test
 
 ci-setup:
-	cp .env.example .env
 	yarn install
 	bundle install --without production development
 	RAILS_ENV=test bin/rails db:prepare
