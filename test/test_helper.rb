@@ -19,6 +19,27 @@ class ActiveSupport::TestCase
   def load_fixture(filename)
     File.read(File.dirname(__FILE__) + "/fixtures/files/#{filename}")
   end
+
+  setup do
+    stubbed_get_repos_response = load_fixture('octokit_repo_response.json')
+    stub_request(:get, 'https://api.github.com/user/repos?per_page=100')
+      .to_return(status: 200, body: "[#{stubbed_get_repos_response}]", headers: { 'Content-Type': 'application/json' })
+
+    get_repo_template = Addressable::Template.new('https://api.github.com/repositories/{id}')
+    stubbed_get_repo_response = load_fixture('octokit_repo_response.json')
+    stub_request(:get, get_repo_template)
+      .to_return(status: 200, body: stubbed_get_repo_response, headers: { 'Content-Type': 'application/json' })
+
+    get_hook_template = Addressable::Template.new('https://api.github.com/repos/{owner_name}/{repo_name}/hooks?per_page=100')
+    stubbed_get_hooks_respone = load_fixture('octokit_get_hooks_response.json')
+    stub_request(:get, get_hook_template)
+      .to_return(status: 200, body: stubbed_get_hooks_respone, headers: { 'Content-Type': 'application/json' })
+
+    create_hook_template = Addressable::Template.new('https://api.github.com/repos/{owner_name}/{repo_name}/hooks')
+    stubbed_create_hook_response = load_fixture('octokit_create_hook_response.json')
+    stub_request(:post, create_hook_template)
+      .to_return(status: 200, body: stubbed_create_hook_response, headers: { 'Content-Type': 'application/json' })
+  end
 end
 
 class ActionDispatch::IntegrationTest
