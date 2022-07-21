@@ -21,9 +21,9 @@ private
 
 def linter_for(language)
   case language
-  when 'JavaScript'
+  when 'javascript'
     'eslint'
-  when 'Ruby'
+  when 'ruby'
     'rubocop'
   end
 end

@@ -5,7 +5,9 @@ class ApplicationContainer
 
   if Rails.env.test?
     register :repository_check, -> { RepositoryCheckStub }
+    register :octokit_client, -> { OctokitClientStub }
   else
     register :repository_check, -> { RepositoryCheck }
+    register :octokit_client, -> { OctokitClient }
   end
 end

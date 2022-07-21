@@ -39,12 +39,8 @@ class User < ApplicationRecord
     user
   end
 
-  def octokit_client
-    @octokit_client ||= Octokit::Client.new(access_token: token, auto_paginate: true)
-  end
-
   def self_owned_repos
     # do not select any organization-owned repositories
-    octokit_client.repos.select { |r| r&.owner&.login == nickname }
+    Octokiter.repos(token).select { |r| r['owner']['login'] == nickname }
   end
 end

@@ -22,7 +22,7 @@ module Web
       repo_id = permitted_params[:github_id].to_i
       redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_id)
 
-      repo_metadata = current_user.octokit_client.repo(repo_id)
+      repo_metadata = Octokiter.repo(repo_id, current_user.token)
       @repository = current_user.repositories.build(new_repo_params(repo_metadata))
       if @repository.save
         create_webhook(@repository.full_name)
@@ -56,16 +56,11 @@ module Web
     end
 
     def create_webhook(repo_full_name)
-      hooks_with_equal_config = current_user.octokit_client.hooks(repo_full_name).select do |hook|
-        hook.config.to_h == webhook_config
+      github_token = current_user.token
+      hooks_with_equal_config = Octokiter.hooks(repo_full_name, github_token).select do |hook|
+        hook['config'].to_h == Octokiter.webhook_config
       end
-      current_user.octokit_client.create_hook(repo_full_name, 'web', webhook_config) if hooks_with_equal_config.empty?
-    end
-
-    def webhook_config
-      {
-        url: "#{ENV['BASE_URL']}/api/checks", content_type: 'json', insecure_ssl: '0'
-      }
+      Octokiter.create_hook(repo_full_name, github_token) if hooks_with_equal_config.empty?
     end
   end
 end
