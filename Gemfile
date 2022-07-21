@@ -62,6 +62,9 @@ group :test do
   gem 'webdrivers'
 
   gem 'minitest-power_assert'
+
+  # Hexlet checks need this gem
+  gem 'webmock'
 end
 
 group :production do
