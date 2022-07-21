@@ -33,5 +33,5 @@ class Repository < ApplicationRecord
   has_many :checks, dependent: :destroy
 
   extend Enumerize
-  enumerize :language, in: %w[JavaScript Ruby]
+  enumerize :language, in: %w[javascript ruby]
 end

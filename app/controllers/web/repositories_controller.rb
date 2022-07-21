@@ -39,6 +39,7 @@ module Web
     end
 
     def new_repo_params(repo_metadata)
+      language = (repo_metadata['parent'] ? repo_metadata['parent']['language'] : repo_metadata['language']).downcase
       {
         github_id: repo_metadata['id'],
         link: repo_metadata['html_url'],
@@ -48,7 +49,7 @@ module Web
         description: repo_metadata['description'],
         default_branch: repo_metadata['default_branch'],
         watchers_count: repo_metadata['watchers_count'],
-        language: repo_metadata['parent'] ? repo_metadata['parent']['language'] : repo_metadata['language'],
+        language: language,
         repo_created_at: repo_metadata['created_at'],
         repo_updated_at: repo_metadata['updated_at']
       }

@@ -9,7 +9,6 @@ class RepositoryCheckJobTest < ActiveJob::TestCase
     check.reload
     assert { check.finished? }
     assert { check.passed? }
-    assert { check.output == load_fixture('eslint_check_result.json') }
   end
 
   test 'Ruby repo check succeeds' do
@@ -18,6 +17,5 @@ class RepositoryCheckJobTest < ActiveJob::TestCase
     check.reload
     assert { check.finished? }
     assert { check.passed? }
-    assert { check.output == load_fixture('rubocop_check_result.json') }
   end
 end
