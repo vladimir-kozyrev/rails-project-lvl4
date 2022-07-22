@@ -6,7 +6,13 @@ class UpdateRepositoryMetadataJob < ApplicationJob
   def perform(repo_id, github_token)
     repository = Repository.find_by(github_id: repo_id)
     repo_metadata = new_repo_params(repo_id, Octokiter.repo(repo_id, github_token))
-    repository.update(repo_metadata)
+    metadata_updated = repository.update(repo_metadata)
+    if metadata_updated
+      repository.reload
+      CreateRepositoryHookJob.perform_later(repository.full_name, github_token)
+    else
+      Rails.logger.error("Failed to update repository with id #{repo_id}")
+    end
   end
 
   private
