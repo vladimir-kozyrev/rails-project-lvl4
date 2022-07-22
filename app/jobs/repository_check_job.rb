@@ -29,9 +29,11 @@ def linter_for(language)
 end
 
 def notify_about_failure(check)
+  repository = check.repository
+  user = repository.user
   RepostiroyCheckMailer.with(
-    name: check.repository.user.name,
-    email: check.repository.user.email,
-    check_url: repository_check_url(check.repository, check)
+    name: user.name,
+    email: user.email,
+    check_url: repository_check_url(repository, check)
   ).notify_about_failure.deliver_later
 end

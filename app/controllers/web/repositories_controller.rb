@@ -25,7 +25,7 @@ module Web
       repo_metadata = Octokiter.repo(repo_id, current_user.token)
       @repository = current_user.repositories.build(new_repo_params(repo_id, repo_metadata))
       if @repository.save
-        create_webhook(@repository.full_name)
+        CreateRepositoryHookJob.perform_later(@repository.full_name, current_user.token)
         redirect_to @repository, notice: t('.success')
       else
         render :new, status: :unprocessable_entity
@@ -53,14 +53,6 @@ module Web
         repo_created_at: repo_metadata['created_at'],
         repo_updated_at: repo_metadata['updated_at']
       }
-    end
-
-    def create_webhook(repo_full_name)
-      github_token = current_user.token
-      hooks_with_equal_config = Octokiter.hooks(repo_full_name, github_token).select do |hook|
-        hook['config'].to_h == Octokiter.webhook_config
-      end
-      Octokiter.create_hook(repo_full_name, github_token) if hooks_with_equal_config.empty?
     end
   end
 end
