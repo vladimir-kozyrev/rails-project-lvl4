@@ -23,7 +23,7 @@ class OctokitClient
 
   def self.webhook_config
     {
-      url: "#{ENV['BASE_URL']}/api/checks", content_type: 'json', insecure_ssl: '0'
+      url: "#{ENV.fetch('BASE_URL', nil)}/api/checks", content_type: 'json', insecure_ssl: '0'
     }
   end
 

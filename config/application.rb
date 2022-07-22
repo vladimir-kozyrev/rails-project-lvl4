@@ -22,6 +22,6 @@ module GithubQuality
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    routes.default_url_options = { host: ENV['BASE_URL'] }
+    routes.default_url_options = { host: ENV.fetch('BASE_URL', nil) }
   end
 end

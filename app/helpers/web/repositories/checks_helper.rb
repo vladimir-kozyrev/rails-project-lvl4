@@ -35,11 +35,13 @@ module Web::Repositories::ChecksHelper
       file_path = issue['filePath']
       formatted_output[file_path] = []
       issue['messages'].each do |issue_messages|
-        formatted_output[file_path].append({
-          message: issue_messages['message'],
-          rule: 'N/A',
-          line_column: "#{issue_messages['line']}:#{issue_messages['column']}"
-        })
+        formatted_output[file_path].append(
+          {
+            message: issue_messages['message'],
+            rule: 'N/A',
+            line_column: "#{issue_messages['line']}:#{issue_messages['column']}"
+          }
+        )
       end
     end
     formatted_output
@@ -55,11 +57,13 @@ module Web::Repositories::ChecksHelper
       file_path = file['path']
       formatted_output[file_path] = []
       file['offenses'].each do |offence|
-        formatted_output[file_path].append({
-          message: offence['message'],
-          rule: offence['cop_name'],
-          line_column: "#{offence['location']['line']}:#{offence['location']['column']}"
-        })
+        formatted_output[file_path].append(
+          {
+            message: offence['message'],
+            rule: offence['cop_name'],
+            line_column: "#{offence['location']['line']}:#{offence['location']['column']}"
+          }
+        )
       end
     end
     formatted_output
