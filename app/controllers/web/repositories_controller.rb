@@ -23,7 +23,7 @@ module Web
       redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_id)
 
       repo_metadata = Octokiter.repo(repo_id, current_user.token)
-      @repository = current_user.repositories.build(new_repo_params(repo_metadata))
+      @repository = current_user.repositories.build(new_repo_params(repo_id, repo_metadata))
       if @repository.save
         create_webhook(@repository.full_name)
         redirect_to @repository, notice: t('.success')
@@ -38,10 +38,10 @@ module Web
       params.require(:repository).permit(:github_id)
     end
 
-    def new_repo_params(repo_metadata)
+    def new_repo_params(repo_id, repo_metadata)
       language = (repo_metadata['parent'] ? repo_metadata['parent']['language'] : repo_metadata['language']).downcase
       {
-        github_id: repo_metadata['id'],
+        github_id: repo_id,
         link: repo_metadata['html_url'],
         owner_name: repo_metadata['owner']['login'],
         name: repo_metadata['name'],
