@@ -34,4 +34,6 @@ class Repository < ApplicationRecord
 
   extend Enumerize
   enumerize :language, in: %w[javascript ruby]
+
+  validates :github_id, presence: true
 end
