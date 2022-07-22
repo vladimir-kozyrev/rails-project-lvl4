@@ -13,7 +13,7 @@ class RepositoryCheckJob < ApplicationJob
     Rails.logger.error(e.message)
   ensure
     check.finish! if check.may_finish?
-    notify_about_failure(check)
+    notify_about_failure(check) unless check.passed?
   end
 end
 
