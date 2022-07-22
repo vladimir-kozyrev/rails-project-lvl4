@@ -2,6 +2,7 @@ en:
   web:
     repositories:
       index:
+        no_checks: 'No checks yet'
         last_check_passed: 'Last check passed'
       new:
         create_repository: 'Create repository'
