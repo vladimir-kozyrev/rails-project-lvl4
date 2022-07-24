@@ -36,8 +36,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'faker'
   gem 'i18n-tasks'
-  gem 'rubocop'
-  gem 'rubocop-rails'
   gem 'slim_lint'
 end
 
@@ -83,5 +81,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'pundit'
 gem 'rails-i18n', '~> 6.0'
 gem 'rollbar'
+gem 'rubocop'
+gem 'rubocop-rails'
 gem 'simple_form'
 gem 'slim-rails'
