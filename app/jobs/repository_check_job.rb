@@ -9,8 +9,6 @@ class RepositoryCheckJob < ApplicationJob
     check.check! if check.may_check?
     check.linter = linter_for(check.repository.language)
     check.passed = RepositoryChecker.new.run(check)
-  rescue StandardError => e
-    Rails.logger.error(e.message)
   ensure
     check.finish! if check.may_finish?
     notify_about_failure(check) unless check.passed?
