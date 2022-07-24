@@ -4,6 +4,8 @@ en:
       models:
         repository:
           attributes:
+            github_id:
+              greater_than: 'cannot be blank'
             language:
               inclusion: 'of this repository is not supported'
         user:

@@ -22,8 +22,8 @@ module Web
       repo_id = permitted_params[:github_id].to_i
       redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_id)
 
-      repository = current_user.repositories.build(permitted_params)
-      if repository.save
+      @repository = current_user.repositories.build(github_id: repo_id)
+      if @repository.save
         UpdateRepositoryMetadataJob.perform_later(repo_id, current_user.token)
         redirect_to repositories_path, notice: t('.success')
       else

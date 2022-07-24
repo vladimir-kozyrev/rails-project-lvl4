@@ -35,5 +35,5 @@ class Repository < ApplicationRecord
   extend Enumerize
   enumerize :language, in: %w[javascript ruby]
 
-  validates :github_id, presence: true
+  validates :github_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
 end
