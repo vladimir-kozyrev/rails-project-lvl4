@@ -20,7 +20,7 @@ class RepositoryCheck
   def self.check(repository_path, linter)
     linter_command = case linter
                      when 'eslint'
-                       "npx eslint --no-eslintrc --format json #{repository_path}"
+                       "yarn run eslint --no-eslintrc --format json #{repository_path}"
                      when 'rubocop'
                        "rubocop --format json #{repository_path}/*"
                      end
