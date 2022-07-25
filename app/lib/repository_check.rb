@@ -21,7 +21,7 @@ class RepositoryCheck
 
   def self.check(repository_path, linter)
     linter_command = linter_command(linter, repository_path)
-    stdout, stderr, exit_status = lint(linter_command, repository_path)
+    stdout, stderr, exit_status = lint(linter_command)
     stdout.gsub!(/^[^\[]+/, '') if linter == 'eslint' && stdout.include?('yarn run')
     if exit_status != 0 && stderr.present?
       Rails.logger.warn "#{linter_command} did not complete successfully"
