@@ -44,7 +44,7 @@ class RepositoryCheck
     end
   end
 
-  def self.lint(command, repository_path)
+  def self.lint(command)
     stdout, stderr, exit_status = Open3.popen3(command) do |_stdin, stdout, stderr, wait_thr|
       [stdout.read, stderr.read, wait_thr.value]
     end
