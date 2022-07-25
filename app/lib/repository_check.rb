@@ -18,15 +18,11 @@ class RepositoryCheck
   end
 
   def self.check(repository_path, linter)
-    linter_command = case linter
-                     when 'eslint'
-                       "yarn run eslint --no-eslintrc --format json #{repository_path}"
-                     when 'rubocop'
-                       "rubocop --format json #{repository_path}/*"
-                     end
+    linter_command = determine_command(linter, repository_path)
     stdout, stderr, exit_status = Open3.popen3(linter_command) do |_stdin, stdout, stderr, wait_thr|
       [stdout.read, stderr.read, wait_thr.value]
     end
+    stdout.gsub!(/^[^\[]+/, '') if linter == 'eslint' && stdout.include?('yarn run')
     if exit_status.exitstatus != 0 && stderr.present?
       Rails.logger.warn("#{linter_command} did not complete successfully")
       Rails.logger.warn("stderr: #{stderr}")
@@ -35,5 +31,14 @@ class RepositoryCheck
     # we must set it to nil because JSON.parse("") throws an error
     stdout = nil if stdout.empty?
     [stdout, exit_status.exitstatus]
+  end
+
+  def self.determine_command(linter, repository_path)
+    case linter
+    when 'eslint'
+      "yarn run eslint --no-eslintrc --format json #{repository_path}"
+    when 'rubocop'
+      "rubocop --format json #{repository_path}/*"
+    end
   end
 end
