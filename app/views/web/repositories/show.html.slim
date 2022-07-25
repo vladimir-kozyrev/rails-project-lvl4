@@ -44,7 +44,10 @@
             td[scope="row"]
               = check.aasm_state
             td[scope="row"]
-              = link_to '3b03d53', root_path
+              - if check.commit_hash.nil?
+                = '-'
+              - else
+                = link_to check.commit_hash, "#{@repository.link}/commit/#{check.commit_hash}"
             td[scope="row"]
               = check.passed?
             td[scope="row"]

@@ -3,9 +3,9 @@
 class RepositoryChecker
   def run(check)
     repository_check = ApplicationContainer[:repository_check]
-    repository_path = repository_check.download(check.repository)
+    repository_path, check.commit_hash = repository_check.download(check.repository)
     unless repository_path
-      Rails.logger.error("Failed to download repository to #{repository_path}")
+      Rails.logger.error "Failed to download repository to #{repository_path}"
       return false
     end
 
