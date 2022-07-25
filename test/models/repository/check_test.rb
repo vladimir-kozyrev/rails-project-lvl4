@@ -6,6 +6,7 @@
 #
 #  id            :integer          not null, primary key
 #  aasm_state    :string
+#  commit_hash   :string
 #  linter        :string
 #  output        :text
 #  passed        :boolean          default(FALSE)

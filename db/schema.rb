@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_19_060553) do
+ActiveRecord::Schema.define(version: 2022_07_25_091351) do
 
   create_table "repositories", force: :cascade do |t|
     t.string "link"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2022_07_19_060553) do
     t.string "linter"
     t.text "output"
     t.boolean "passed", default: false
+    t.string "commit_hash"
     t.index ["repository_id"], name: "index_repository_checks_on_repository_id"
   end
 
