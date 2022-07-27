@@ -38,9 +38,9 @@ class RepositoryCheck
   def self.linter_command(language, repository_path)
     case language
     when 'javascript'
-      "yarn run eslint --no-eslintrc --format json #{repository_path}"
+      "yarn run eslint --config #{Rails.root}/.eslintrc.yml --no-eslintrc --format json #{repository_path}"
     when 'ruby'
-      "bundle exec rubocop --format json #{repository_path}/*"
+      "bundle exec rubocop --config #{Rails.root}/.rubocop.yml --format json #{repository_path}"
     end
   end
 

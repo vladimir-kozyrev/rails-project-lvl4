@@ -10,6 +10,8 @@ AllCops:
     - '**/examples/**/*'
     - '**/bin/*'
     - '**/tmp/**/*'
+  Include:
+    - 'tmp/repositories'
 
 Style/Documentation:
   Enabled: false
