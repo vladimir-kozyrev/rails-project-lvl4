@@ -22,7 +22,6 @@ class RepositoryCheck
   def self.check(repository_path, language)
     linter_command = linter_command(language, repository_path)
     stdout, stderr, exit_status = lint(linter_command)
-    stdout.gsub!(/^[^\[]+/, '') if language == 'javascript' && stdout.include?('yarn run')
     if exit_status != 0 && stderr.present?
       Rails.logger.warn "#{linter_command} did not complete successfully"
       Rails.logger.warn "stderr: #{stderr}"
@@ -38,7 +37,7 @@ class RepositoryCheck
   def self.linter_command(language, repository_path)
     case language
     when 'javascript'
-      "yarn run eslint --config #{Rails.root}/.eslintrc.yml --no-eslintrc --format json #{repository_path}"
+      "#{Rails.root}/node_modules/eslint/bin/eslint.js --config #{Rails.root}/.eslintrc.yml --no-eslintrc --format json #{repository_path}"
     when 'ruby'
       "bundle exec rubocop --config #{Rails.root}/.rubocop.yml --format json #{repository_path}"
     end
