@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 module Web::Repositories::ChecksHelper
-  def parse_check_output(check_output, linter)
-    case linter
-    when 'eslint'
+  def parse_check_output(check_output, language)
+    case language
+    when 'javascript'
       format_eslint_output(check_output)
-    when 'rubocop'
+    when 'ruby'
       format_rubocop_output(check_output)
     else
       {}
     end
   end
 
-  def issues_count(check_output, linter)
-    case linter
-    when 'rubocop'
+  def issues_count(check_output, language)
+    case language
+    when 'ruby'
       if check_output.is_a?(Hash)
         check_output.fetch('files', []).size
       else

@@ -25,7 +25,7 @@
         td
           = t('.issues_count')
         td
-          = issues_count(@check_output_json, @check.linter)
+          = issues_count(@check_output_json, @check.repository.language)
   table.table.table-hover.mb-5
     thead
       tr
@@ -36,7 +36,7 @@
         th
           = t('.line_column')
     tbody
-      - parse_check_output(@check_output_json, @check.linter).each do |file_name, file_messages|
+      - parse_check_output(@check_output_json, @check.repository.language).each do |file_name, file_messages|
         tr
           td[colspan="3"]
             strong = file_name

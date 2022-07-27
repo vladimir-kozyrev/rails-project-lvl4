@@ -19,10 +19,10 @@ class RepositoryCheck
     [repo_clone_path, commit_hash]
   end
 
-  def self.check(repository_path, linter)
-    linter_command = linter_command(linter, repository_path)
+  def self.check(repository_path, language)
+    linter_command = linter_command(language, repository_path)
     stdout, stderr, exit_status = lint(linter_command)
-    stdout.gsub!(/^[^\[]+/, '') if linter == 'eslint' && stdout.include?('yarn run')
+    stdout.gsub!(/^[^\[]+/, '') if language == 'javascript' && stdout.include?('yarn run')
     if exit_status != 0 && stderr.present?
       Rails.logger.warn "#{linter_command} did not complete successfully"
       Rails.logger.warn "stderr: #{stderr}"
@@ -35,11 +35,11 @@ class RepositoryCheck
     FileUtils.rm_rf(repository_path)
   end
 
-  def self.linter_command(linter, repository_path)
-    case linter
-    when 'eslint'
+  def self.linter_command(language, repository_path)
+    case language
+    when 'javascript'
       "yarn run eslint --no-eslintrc --format json #{repository_path}"
-    when 'rubocop'
+    when 'ruby'
       "bundle exec rubocop --format json #{repository_path}/*"
     end
   end

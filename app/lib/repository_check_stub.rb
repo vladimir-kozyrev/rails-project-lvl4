@@ -5,7 +5,7 @@ class RepositoryCheckStub
     true
   end
 
-  def self.check(_repository_path, _linter)
+  def self.check(_repository_path, _language)
     ['', 0]
   end
 end

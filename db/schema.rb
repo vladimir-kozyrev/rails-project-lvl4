@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_25_091351) do
+ActiveRecord::Schema.define(version: 2022_07_27_141005) do
 
   create_table "repositories", force: :cascade do |t|
     t.string "link"
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2022_07_25_091351) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "aasm_state"
     t.integer "repository_id", null: false
-    t.string "linter"
     t.text "output"
     t.boolean "passed", default: false
     t.string "commit_hash"
