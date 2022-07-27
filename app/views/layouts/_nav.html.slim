@@ -13,4 +13,4 @@ nav.p-2.bg-dark.text-white
           = link_to t('.sign_out'), sign_out_path, method: :delete, class: 'text-white nav-link'
       - else
         li.nav-item
-          = link_to t('.sign_in'), '/auth/github', method: :post, class: 'text-white nav-link'
+          = link_to t('.sign_in'), auth_request_path('github'), method: :post, class: 'text-white nav-link'
