@@ -52,14 +52,11 @@ class RepositoryCheck
   end
 
   def self.commit_hash(repo_clone_path)
-    commit_hash = '-'
-    Dir.chdir(repo_clone_path) do
-      command = 'git rev-parse --short HEAD'
-      commit_hash, exit_status = Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
-        [stdout.read, wait_thr.value]
-      end
-      Rails.logger.error "Failed to get commit hash from #{repo_clone_path}" if exit_status.exitstatus != 0
+    command = "cd #{repo_clone_path} && git rev-parse --short HEAD"
+    commit_hash, exit_status = Open3.popen3(command) do |_stdin, stdout, _stderr, wait_thr|
+      [stdout.read, wait_thr.value]
     end
+    Rails.logger.error "Failed to get commit hash from #{repo_clone_path}" if exit_status.exitstatus != 0
     commit_hash
   end
 end
