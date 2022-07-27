@@ -5,7 +5,7 @@ module Web
     def callback
       @user = User.find_or_create_from_auth(auth_hash)
       if @user
-        session[:user_id] = @user.id
+        sign_in(@user)
         redirect_to root_path, notice: t('.success')
       else
         redirect_to root_path, alert: t('.failure')
