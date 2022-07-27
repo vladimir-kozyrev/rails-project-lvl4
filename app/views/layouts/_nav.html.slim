@@ -1,6 +1,6 @@
 nav.p-2.bg-dark.text-white
   .container.d-flex.flex-wrap
-    = link_to 'GitHub Quality', root_path, class: 'text-white navbar-brand'
+    = link_to t('layouts.application.title'), root_path, class: 'text-white navbar-brand'
     ul.nav.me-auto
       - if signed_in?
         li.nav-item
