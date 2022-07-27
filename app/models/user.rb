@@ -25,8 +25,7 @@ class User < ApplicationRecord
     user.name = auth['info']['name']
     user.nickname = auth['info']['nickname']
     user.token = auth['credentials']['token']
-    user.save!
-    user
+    user if user.save
   end
 
   def self_owned_repos
