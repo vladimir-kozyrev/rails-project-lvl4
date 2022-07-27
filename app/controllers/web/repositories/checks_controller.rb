@@ -2,7 +2,7 @@
 
 module Web
   class Repositories::ChecksController < ApplicationController
-    before_action :verify_signed_in, only: %i[create show]
+    before_action :verify_signed_in
     after_action :verify_authorized, only: %i[create show]
 
     def create

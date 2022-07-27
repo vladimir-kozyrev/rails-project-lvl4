@@ -2,7 +2,7 @@
 
 module Web
   class RepositoriesController < ApplicationController
-    before_action :verify_signed_in, only: %i[index new show create]
+    before_action :verify_signed_in
     after_action :verify_authorized, only: :show
 
     def index
