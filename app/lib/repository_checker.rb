@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RepositoryChecker
-  def run(check)
+  def self.run(check)
     repository_check = ApplicationContainer[:repository_check]
     repository_path, check.commit_hash = repository_check.download(check.repository)
     unless repository_path
