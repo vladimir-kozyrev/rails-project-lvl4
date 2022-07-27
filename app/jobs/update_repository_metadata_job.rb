@@ -5,7 +5,7 @@ class UpdateRepositoryMetadataJob < ApplicationJob
 
   def perform(repo_id, github_token)
     repository = Repository.find_by(github_id: repo_id)
-    repo_metadata = new_repo_params(repo_id, Octokiter.repo(repo_id, github_token))
+    repo_metadata = new_repo_params(Octokiter.repo(repo_id, github_token))
     metadata_updated = repository.update(repo_metadata)
     if metadata_updated
       repository.reload
@@ -17,10 +17,9 @@ class UpdateRepositoryMetadataJob < ApplicationJob
 
   private
 
-  def new_repo_params(repo_id, repo_metadata)
+  def new_repo_params(repo_metadata)
     language = (repo_metadata['parent'] ? repo_metadata['parent']['language'] : repo_metadata['language']).downcase
     {
-      github_id: repo_id,
       link: repo_metadata['html_url'],
       owner_name: repo_metadata['owner']['login'],
       name: repo_metadata['name'],
