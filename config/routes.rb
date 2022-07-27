@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   scope module: :web do
     root 'home#index'
     resources :home, only: :index
-    resources :repositories do
+    resources :repositories, only: %i[index show new create] do
       scope module: :repositories do
         resources :checks, only: %i[create show]
       end
