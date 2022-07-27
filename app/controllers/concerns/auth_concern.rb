@@ -10,4 +10,11 @@ module AuthConcern
   def signed_in?
     current_user.present?
   end
+
+  def verify_signed_in
+    return if signed_in?
+
+    flash[:alert] = t('web.auth.not_signed_in')
+    redirect_back(fallback_location: root_path)
+  end
 end
