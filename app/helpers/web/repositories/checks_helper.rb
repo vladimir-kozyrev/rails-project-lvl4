@@ -38,7 +38,7 @@ module Web::Repositories::ChecksHelper
         formatted_output[file_path].append(
           {
             message: issue_messages['message'],
-            rule: 'N/A',
+            rule: issue_messages['ruleId'],
             line_column: "#{issue_messages['line']}:#{issue_messages['column']}"
           }
         )
