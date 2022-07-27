@@ -24,7 +24,7 @@ module Web
 
       @repository = current_user.repositories.build(github_id: repo_id)
       if @repository.save
-        UpdateRepositoryMetadataJob.perform_later(repo_id, current_user.token)
+        UpdateRepositoryMetadataJob.perform_later(repo_id)
         redirect_to repositories_path, notice: t('.success')
       else
         render :new, status: :unprocessable_entity

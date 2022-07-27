@@ -3,8 +3,9 @@
 class UpdateRepositoryMetadataJob < ApplicationJob
   queue_as :default
 
-  def perform(repo_id, github_token)
+  def perform(repo_id)
     repository = Repository.find_by(github_id: repo_id)
+    github_token = repository.user.token
     repo_metadata = new_repo_params(Octokiter.repo(repo_id, github_token))
     metadata_updated = repository.update(repo_metadata)
     if metadata_updated
