@@ -5,7 +5,7 @@ require 'securerandom'
 
 class RepositoryCheck
   def self.download(repository)
-    repo_clone_path = "#{Rails.root}/tmp/repositories/#{SecureRandom.uuid}"
+    repo_clone_path = "/tmp/#{SecureRandom.uuid}"
     command = "git clone #{repository.link} #{repo_clone_path}"
     stderr, exit_status = Open3.popen3(command) do |_stdin, _stdout, stderr, wait_thr|
       [stderr.read, wait_thr.value]
