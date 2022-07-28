@@ -27,7 +27,7 @@
 #  user_id  (user_id => users.id)
 #
 
-one:
+js:
   github_id: 12345
   link: https://github.com/test/test1
   owner_name: test
@@ -41,7 +41,7 @@ one:
   repo_updated_at: 2022-07-06 16:07:02
   user_id: 111
 
-two:
+ruby:
   github_id: 45678
   link: https://github.com/test/test2
   owner_name: test

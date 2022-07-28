@@ -4,7 +4,7 @@ require 'test_helper'
 
 class UpdateRepositoryMetadataJobTest < ActiveJob::TestCase
   test 'repository metadata is updated' do
-    repository = repositories(:one)
+    repository = repositories(:js)
     UpdateRepositoryMetadataJob.perform_now(repository.github_id)
     repository.reload
     assert { repository.name == 'Hello-World' }

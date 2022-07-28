@@ -20,9 +20,7 @@
 #  repository_id  (repository_id => repositories.id)
 #
 one:
-  output:
-  repository: one
+  repository: js
 
 two:
-  output:
-  repository: two
+  repository: ruby

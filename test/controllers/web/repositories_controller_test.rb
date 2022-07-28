@@ -13,7 +13,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
-    get repository_url(repositories(:two))
+    get repository_url(repositories(:ruby))
     assert_response :success
   end
 
