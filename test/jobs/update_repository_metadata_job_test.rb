@@ -7,8 +7,7 @@ class UpdateRepositoryMetadataJobTest < ActiveJob::TestCase
     repository = repositories(:one)
     UpdateRepositoryMetadataJob.perform_now(repository.github_id)
     repository.reload
-    repository_dummy = JSON.parse(load_fixture('octokit_repo_response.json'))
-    assert { repository.name == repository_dummy['name'] }
-    assert { repository.owner_name == repository_dummy['owner']['login'] }
+    assert { repository.name == 'Hello-World' }
+    assert { repository.owner_name == 'octocat' }
   end
 end
