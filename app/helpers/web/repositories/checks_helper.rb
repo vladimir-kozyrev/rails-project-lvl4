@@ -16,12 +16,12 @@ module Web::Repositories::ChecksHelper
     case language
     when 'ruby'
       if check_output.is_a?(Hash)
-        check_output.fetch('files', []).size
+        check_output.fetch('summary').fetch('offense_count')
       else
         0
       end
-    else
-      check_output.size
+    when 'javascript'
+      check_output.inject(0) { |count, file| file['messages'].size + count }
     end
   end
 
