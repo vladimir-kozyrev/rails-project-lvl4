@@ -26,9 +26,6 @@ class RepositoryCheck
       Rails.logger.warn "#{linter_command} did not complete successfully"
       Rails.logger.warn "stderr: #{stderr}"
     end
-    # since stdout will be put into check.output,
-    # we must set it to nil because JSON.parse("") throws an error
-    stdout = nil if stdout.empty?
     [stdout, exit_status]
   ensure
     FileUtils.rm_rf(repository_path)
