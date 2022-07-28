@@ -6,10 +6,18 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(check)
-    check.check! if check.may_check?
+    if check.may_check?
+      check.check!
+    else
+      check.fail!
+      return
+    end
     check.passed = RepositoryChecker.run(check)
+    check.may_finish? ? check.finish! : check.fail!
+  rescue StandardError
+    check.fail!
+    raise
   ensure
-    check.finish! if check.may_finish?
     notify_about_failure(check) unless check.passed?
   end
 end
