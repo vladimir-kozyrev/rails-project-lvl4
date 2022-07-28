@@ -15,8 +15,7 @@ class RepositoryCheck
       Rails.logger.error "stderr: #{stderr}"
       FileUtils.rm_rf(repo_clone_path) and return [nil, nil]
     end
-    commit_hash = commit_hash(repo_clone_path)
-    [repo_clone_path, commit_hash]
+    repo_clone_path
   end
 
   def self.check(repository_path, language)
@@ -26,7 +25,8 @@ class RepositoryCheck
       Rails.logger.warn "#{linter_command} did not complete successfully"
       Rails.logger.warn "stderr: #{stderr}"
     end
-    [stdout, exit_status]
+    commit_hash = commit_hash(repository_path)
+    [stdout, commit_hash, exit_status]
   ensure
     FileUtils.rm_rf(repository_path)
   end
