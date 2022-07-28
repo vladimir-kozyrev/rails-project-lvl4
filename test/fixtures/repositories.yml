@@ -39,7 +39,7 @@ js:
   language: javascript
   repo_created_at: 2022-07-06 16:07:02
   repo_updated_at: 2022-07-06 16:07:02
-  user_id: 111
+  user: joe
 
 ruby:
   github_id: 45678
@@ -53,4 +53,4 @@ ruby:
   language: ruby
   repo_created_at: 2022-07-06 16:07:02
   repo_updated_at: 2022-07-06 16:07:02
-  user_id: 111
+  user: joe

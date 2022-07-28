@@ -13,7 +13,6 @@
 #
 
 joe:
-  id: 111
   nickname: MyString
   name: MyString
   email: MyString
