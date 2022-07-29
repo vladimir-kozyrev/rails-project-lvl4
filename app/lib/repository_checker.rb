@@ -9,7 +9,7 @@ class RepositoryChecker
       return false
     end
 
-    check.output, check.commit_hash, exit_code = repository_check.check(repository_path, check.repository.language)
+    exit_code = repository_check.check(repository_path, check)
     return false if exit_code != 0
 
     true

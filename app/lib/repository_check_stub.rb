@@ -6,6 +6,6 @@ class RepositoryCheckStub
   end
 
   def self.check(_repository_path, _language)
-    ['', '', 0]
+    0
   end
 end

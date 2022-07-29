@@ -18,15 +18,19 @@ class RepositoryCheck
     repo_clone_path
   end
 
-  def self.check(repository_path, language)
+  def self.check(repository_path, check)
+    language = check.repository.language
     linter_command = linter_command(language, repository_path)
     stdout, stderr, exit_status = lint(linter_command)
     if exit_status != 0 && stderr.present?
       Rails.logger.warn "#{linter_command} did not complete successfully"
       Rails.logger.warn "stderr: #{stderr}"
     end
-    commit_hash = commit_hash(repository_path)
-    [stdout, commit_hash, exit_status]
+    stdout_json = JSON.parse(stdout.presence || '[]')
+    check.output = format_output(stdout_json, language).to_json
+    check.offense_count = offense_count(stdout_json, language)
+    check.commit_hash = commit_hash(repository_path)
+    exit_status
   ensure
     FileUtils.rm_rf(repository_path)
   end
@@ -55,5 +59,67 @@ class RepositoryCheck
     end
     Rails.logger.error "Failed to get commit hash from #{repo_clone_path}" if exit_status.exitstatus != 0
     commit_hash
+  end
+
+  def self.format_output(check_output, language)
+    case language
+    when 'javascript'
+      format_eslint_output(check_output)
+    when 'ruby'
+      format_rubocop_output(check_output)
+    else
+      {}
+    end
+  end
+
+  def self.format_eslint_output(check_output)
+    formatted_output = {}
+    check_output.each do |issue|
+      next if issue['messages'].empty?
+
+      file_path = issue['filePath']
+      formatted_output[file_path] = []
+      issue['messages'].each do |issue_messages|
+        formatted_output[file_path].append(
+          {
+            message: issue_messages['message'],
+            rule: issue_messages['ruleId'],
+            line_column: "#{issue_messages['line']}:#{issue_messages['column']}"
+          }
+        )
+      end
+    end
+    formatted_output
+  end
+
+  def self.format_rubocop_output(check_output)
+    return {} if check_output.empty?
+
+    formatted_output = {}
+    check_output['files'].each do |file|
+      next if file['offenses'].empty?
+
+      file_path = file['path']
+      formatted_output[file_path] = []
+      file['offenses'].each do |offence|
+        formatted_output[file_path].append(
+          {
+            message: offence['message'],
+            rule: offence['cop_name'],
+            line_column: "#{offence['location']['line']}:#{offence['location']['column']}"
+          }
+        )
+      end
+    end
+    formatted_output
+  end
+
+  def self.offense_count(check_output, language)
+    case language
+    when 'ruby'
+      check_output.fetch('summary').fetch('offense_count')
+    when 'javascript'
+      check_output.inject(0) { |count, file| file['messages'].size + count }
+    end
   end
 end

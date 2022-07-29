@@ -10,7 +10,7 @@ class CreateRepositoryHookJob < ApplicationJob
       hook['config'].to_h == Octokiter.webhook_config(api_checks_url)
     end
     Octokiter.create_hook(repo_full_name, api_checks_url, github_token) if hooks_with_equal_config.empty?
-  rescue StandardError => e
+  rescue StandardError
     Rails.logger.error("Failed to create webhook for repository #{repo_full_name}")
     raise
   end

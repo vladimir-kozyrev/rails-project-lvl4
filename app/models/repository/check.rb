@@ -7,6 +7,7 @@
 #  id            :integer          not null, primary key
 #  aasm_state    :string
 #  commit_hash   :string
+#  offense_count :integer          default(0)
 #  output        :text
 #  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
