@@ -3,6 +3,7 @@
 require 'fileutils'
 require 'securerandom'
 
+# rubocop:disable Metrics/ClassLength
 class RepositoryCheck
   def self.download(repository)
     repo_clone_path = "/tmp/#{SecureRandom.uuid}"
@@ -123,3 +124,4 @@ class RepositoryCheck
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
