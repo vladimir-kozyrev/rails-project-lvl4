@@ -118,7 +118,7 @@ class RepositoryCheck
   def self.offense_count(check_output, language)
     case language
     when 'ruby'
-      check_output.fetch('summary').fetch('offense_count')
+      check_output.dig('summary', 'offense_count') || 0
     when 'javascript'
       check_output.inject(0) { |count, file| file['messages'].size + count }
     end
