@@ -14,7 +14,7 @@ class RepositoryCheck
     if exit_status.exitstatus != 0 && stderr.present?
       Rails.logger.error "Failed to clone repository #{repository.link} to #{repo_clone_path}"
       Rails.logger.error "stderr: #{stderr}"
-      FileUtils.rm_rf(repo_clone_path) and return [nil, nil]
+      FileUtils.rm_rf(repo_clone_path) and return nil
     end
     repo_clone_path
   end
