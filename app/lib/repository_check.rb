@@ -21,11 +21,7 @@ class RepositoryCheck
   def self.check(repository_path, check)
     language = check.repository.language
     linter = "#{language.capitalize}Linter".constantize
-    stdout, stderr, exit_status = linter.lint(repository_path)
-    if exit_status != 0 && stderr.present?
-      Rails.logger.warn "#{linter_command} did not complete successfully"
-      Rails.logger.warn "stderr: #{stderr}"
-    end
+    stdout, exit_status = linter.lint(repository_path)
     stdout_json = JSON.parse(stdout.presence || '[]')
     check.output = linter.format_output(stdout_json).to_json
     check.offense_count = linter.offense_count(stdout_json)
