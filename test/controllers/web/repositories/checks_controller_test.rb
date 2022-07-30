@@ -18,5 +18,8 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
     post repository_checks_url(repository.id)
     assert_response :redirect, message: 'A check was successfully created'
     assert_performed_with job: RepositoryCheckJob
+    check = repository.checks.last
+    assert { check.finished? }
+    assert { check.passed? }
   end
 end
