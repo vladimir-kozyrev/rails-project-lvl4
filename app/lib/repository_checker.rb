@@ -10,6 +10,6 @@ class RepositoryChecker
     end
 
     exit_code = repository_check.check(repository_path, check)
-    exit_code == 0
+    exit_code.zero?
   end
 end
