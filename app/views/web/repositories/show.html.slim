@@ -34,7 +34,7 @@
           th[scope="col"]
             = t('created_at')
       tbody
-        - @repository.checks.order(created_at: :desc).each do |check|
+        - @checks.each do |check|
           tr
             td[scope="row"]
               - if check.finished?
