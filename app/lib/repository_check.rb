@@ -120,7 +120,7 @@ class RepositoryCheck
     when 'ruby'
       check_output.dig('summary', 'offense_count') || 0
     when 'javascript'
-      check_output.inject(0) { |count, file| file['messages'].size + count }
+      check_output { |file| file['messages'].size }
     end
   end
 end
