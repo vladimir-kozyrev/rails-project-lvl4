@@ -14,9 +14,10 @@ class RepositoryCheckJob < ApplicationJob
     end
     check.passed = RepositoryChecker.run(check)
     check.may_finish? ? check.finish! : check.fail!
-  rescue StandardError
+  rescue StandardError => e
     check.fail!
-    raise
+    Rails.logger.error(e.message)
+    e.backtrace.each { |line| Rails.logger.error(line) }
   ensure
     notify_about_failure(check) unless check.passed?
   end
