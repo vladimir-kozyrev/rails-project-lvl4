@@ -6,14 +6,9 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(check)
-    if check.may_check?
-      check.check!
-    else
-      check.fail!
-      return
-    end
+    check.check!
     check.passed = RepositoryChecker.run(check)
-    check.may_finish? ? check.finish! : check.fail!
+    check.finish!
   rescue StandardError => e
     check.fail!
     Rails.logger.error(e.message)
