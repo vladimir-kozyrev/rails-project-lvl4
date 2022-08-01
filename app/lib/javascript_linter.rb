@@ -3,7 +3,7 @@
 class JavascriptLinter < BaseLinter
   def self.linter_command
     eslint = Rails.root.join('node_modules/eslint/bin/eslint.js')
-    "#{eslint} --config #{Rails.root.join('/.eslintrc.yml')} --no-eslintrc --format json"
+    "#{eslint} --config #{Rails.root.join('.eslintrc.yml')} --no-eslintrc --format json"
   end
 
   def self.format_output(linter_output)
