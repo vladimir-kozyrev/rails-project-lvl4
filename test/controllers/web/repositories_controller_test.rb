@@ -26,6 +26,8 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repo_id = 1_296_269
     post repositories_url, params: { repository: { github_id: repo_id } }
     assert_response :redirect
-    assert { Repository.find_by(github_id: repo_id) }
+    repository = Repository.find_by(github_id: repo_id)
+    assert { repository.full_name == 'TheAlgorithms/JavaScript' }
+    assert { repository.description == 'This your first repo!' }
   end
 end
