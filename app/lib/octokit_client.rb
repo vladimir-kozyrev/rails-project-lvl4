@@ -16,14 +16,14 @@ class OctokitClient
     client.hooks(repo_full_name)
   end
 
-  def self.create_hook(repo_full_name, url, github_token)
+  def self.create_hook(repo_full_name, github_token)
     @github_token = github_token
-    client.create_hook(repo_full_name, 'web', webhook_config(url))
+    client.create_hook(repo_full_name, 'web', webhook_config)
   end
 
-  def self.webhook_config(url)
+  def self.webhook_config
     {
-      url: url, content_type: 'json', insecure_ssl: '0'
+      url: Rails.application.routes.url_helpers.api_checks_url, content_type: 'json', insecure_ssl: '0'
     }
   end
 

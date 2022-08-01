@@ -15,11 +15,11 @@ class OctokitClientStub
     JSON.parse(File.read('test/fixtures/files/octokit_get_hooks_response.json'))
   end
 
-  def self.create_hook(_repo_full_name, _url, _github_token)
+  def self.create_hook(_repo_full_name, _github_token)
     JSON.parse(File.read('test/fixtures/files/octokit_create_hook_response.json'))
   end
 
-  def self.webhook_config(url)
-    OctokitClient.webhook_config(url)
+  def self.webhook_config
+    OctokitClient.webhook_config
   end
 end
