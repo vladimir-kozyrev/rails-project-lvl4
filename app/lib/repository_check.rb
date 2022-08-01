@@ -39,15 +39,4 @@ class RepositoryCheck
     Rails.logger.error "Failed to get commit hash from #{repo_clone_path}" if exit_status.exitstatus != 0
     commit_hash
   end
-
-  def self.format_output(check_output, language)
-    case language
-    when 'javascript'
-      format_eslint_output(check_output)
-    when 'ruby'
-      format_rubocop_output(check_output)
-    else
-      {}
-    end
-  end
 end
