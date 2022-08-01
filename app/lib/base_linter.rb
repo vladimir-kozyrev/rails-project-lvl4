@@ -9,5 +9,7 @@ class BaseLinter
     [stdout, exit_status.exitstatus]
   end
 
-  def self.linter_command; end
+  def self.linter_command
+    raise NotImplementedError
+  end
 end
