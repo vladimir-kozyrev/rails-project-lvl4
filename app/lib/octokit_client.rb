@@ -8,10 +8,7 @@ class OctokitClient
 
   def self.repos(github_token)
     @github_token = github_token
-    repos = client.repos
-    Rails.logger.debug(repos)
-    Rails.logger.debug(client)
-    repos
+    client.repos
   end
 
   def self.hooks(repo_full_name, github_token)
@@ -31,6 +28,6 @@ class OctokitClient
   end
 
   def self.client
-    @client ||= Octokit::Client.new(access_token: @github_token, auto_paginate: true)
+    Octokit::Client.new(access_token: @github_token, auto_paginate: true)
   end
 end
