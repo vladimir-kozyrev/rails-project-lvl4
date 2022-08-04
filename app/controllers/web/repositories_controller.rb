@@ -21,7 +21,10 @@ module Web
 
     def create
       repo_id = permitted_params[:github_id].to_i
-      redirect_to repositories_path, notice: t('.success') and return if Repository.find_by(github_id: repo_id)
+      if Repository.find_by(github_id: repo_id)
+        redirect_to repositories_path, notice: t('.success')
+        return
+      end
 
       @repository = current_user.repositories.build(github_id: repo_id)
       if @repository.save
