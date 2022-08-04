@@ -6,7 +6,7 @@ module Api
 
     def create
       if params[:repository].blank?
-        render status: :unprocessable_entity, json: '{"message": "The payload must include repository attribute"}'
+        head :unprocessable_entity
         return
       end
 
@@ -14,16 +14,16 @@ module Api
       repository = Repository.find_by(full_name: repo_full_name)
 
       if repository.blank?
-        render status: :unprocessable_entity, json: '{"message": "A repository with that name have not been created"}'
+        head :unprocessable_entity
         return
       end
 
       check = repository.checks.build
       if check.save
         RepositoryCheckJob.perform_later(check)
-        render status: :ok, json: '{"message": "A check was successfully created"}'
+        head :ok
       else
-        render status: :unprocessable_entity, json: '{"message": "Failed to create a new check"}'
+        head :unprocessable_entity
       end
     end
   end
