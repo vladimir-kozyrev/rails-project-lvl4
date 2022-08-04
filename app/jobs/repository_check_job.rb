@@ -7,7 +7,8 @@ class RepositoryCheckJob < ApplicationJob
 
   def perform(check)
     check.run_check!
-    check.passed = RepositoryChecker.run(check)
+    repository_checker = ApplicationContainer[:repository_checker]
+    check.passed = repository_checker.check(check)
     check.finish!
   rescue StandardError => e
     check.fail!
