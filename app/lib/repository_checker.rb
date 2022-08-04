@@ -8,12 +8,11 @@ class RepositoryChecker
     repository_path = download(check.repository)
     return false unless repository_path
 
-    language = check.repository.language
-    linter = "#{language.capitalize}Linter".constantize
+    linter, output_formatter = init_language_variables(check)
     stdout, exit_status = linter.lint(repository_path)
     stdout_json = JSON.parse(stdout.presence || '[]')
     check.offense_count = linter.offense_count(stdout_json)
-    check.output = linter.format_output(stdout_json).to_json
+    check.output = output_formatter.format_output(stdout_json).to_json
     check.commit_hash = commit_hash(repository_path)
     exit_status.zero?
   ensure
@@ -22,6 +21,13 @@ class RepositoryChecker
 
   class << self
     private
+
+    def init_language_variables(check)
+      language = check.repository.language.capitalize
+      linter = "#{language}Linter".constantize
+      output_formatter = "#{language}OutputFormatter".constantize
+      [linter, output_formatter]
+    end
 
     def download(repository)
       repo_clone_path = "/tmp/#{SecureRandom.uuid}"
