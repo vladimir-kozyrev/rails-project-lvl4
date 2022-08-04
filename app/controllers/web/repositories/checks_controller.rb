@@ -13,7 +13,7 @@ module Web
         RepositoryCheckJob.perform_later(check)
         redirect_to repository, notice: t('.success')
       else
-        redirect_to repository, notice: t('.failure')
+        redirect_to repository, alert: t('.failure')
       end
     end
 
