@@ -6,7 +6,7 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(check)
-    check.check!
+    check.run_check!
     check.passed = RepositoryChecker.run(check)
     check.finish!
   rescue StandardError => e

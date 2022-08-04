@@ -31,7 +31,7 @@ class Repository::Check < ApplicationRecord
     state :created, initial: true
     state :checking, :finished, :failed
 
-    event :check do
+    event :run_check do
       transitions to: :checking
     end
 
