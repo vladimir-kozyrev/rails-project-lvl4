@@ -28,8 +28,13 @@ class User < ApplicationRecord
     user if user.save
   end
 
-  def self_owned_repos
-    # do not select any organization-owned repositories
-    Octokiter.repos(token).select { |r| r['owner']['login'] == nickname }
+  def supported_repos
+    # Do not select any organization-owned repositories and
+    # select reositories which languages the app can handle.
+    supported_languages = Repository.enumerized_attributes['language'].values
+    Octokiter.repos(token).select do |r|
+      l = r['language']&.downcase
+      r['owner']['login'] == nickname && supported_languages.include?(l)
+    end
   end
 end

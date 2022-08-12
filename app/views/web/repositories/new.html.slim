@@ -4,5 +4,5 @@
       = simple_form_for @repository do |f|
         = f.error_notification message: f.object.errors.full_messages.to_sentence if f.object.errors.present?
 
-        = f.input :github_id, collection: current_user.self_owned_repos, label_method: :full_name, value_method: :id
+        = f.input :github_id, collection: current_user.supported_repos, label_method: :full_name, value_method: :id
         = f.submit t('.create_repository'), class: 'btn btn-success mt-2'
